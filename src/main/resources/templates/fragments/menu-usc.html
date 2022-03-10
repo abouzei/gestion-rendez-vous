@@ -1,0 +1,34 @@
+<th:block th:fragment="menu(actif)">
+<div class="navbar-expand-md">
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <div class="navbar navbar-light">
+                    <div class="container-xl">
+                        <ul class="navbar-nav">
+                            <li class="nav-item" th:classappend="${actif} == 'monEspace' ? 'active':''">
+                                <a class="nav-link" th:href="@{/usc/monEspace}">
+                                    <span class="nav-link-title">
+                                        Accueil
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:classappend="${actif} == 'nouvelleDemande' ? 'active':''">
+                                <a class="nav-link" th:href="@{/usc/nouvelleDemande}" role="button">
+                                Nouvelle demande
+                            	</a>
+                            </li>
+                              <li class="nav-item" th:classappend="${actif} == 'mesDemandes' ? 'active':''">
+                                <a class="nav-link" th:href="@{/usc/mesDemandes}" role="button">
+                                Mes demandes
+                            	</a>
+                            </li>
+                             <li class="nav-item" th:classappend="${actif} == 'maMessagerie' ? 'active':''">
+                                <a class="nav-link" th:href="@{/usc/maMessagerie}" role="button">
+                                Ma messagerie
+                            	</a>
+                            </li>                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>			
+</th:block>

@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'modifierPasse','Modifier mon mot de passe')}">
+<meta charset="utf-8">
+
+<body>
+    <div class="page">
+        <div class="container-tight py-4">
+            <form class="card card-md" th:action="@{/usc/modifierPasse}" method="post" autocomplete="off">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Modifier le mot de passe</h2>
+                    <div class="field mb-3">
+                        <label for="email" class="form-label required">Nouveau mot de passe</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="field mb-1">
+                        <label for="email" class="form-label required">Confirmer nouveau mot de passe</label>
+                        <input type="password" id="re-password" class="form-control" required>
+                    </div>
+                    <div class="field mb-3">
+                        <span id="message"></span>
+                    </div>
+                    <div class="field mb-3">
+                        <button type="submit" id="submit-pass" class="btn btn-primary">Modifier</button>
+                    </div>
+                </div>
+                <div class="hr-text"></div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#submit-pass').prop('disabled', true);
+        });
+        $(() => {
+            $('#password, #re-password').on('keyup', function() {
+                if ($('#password').val() == "" && $('#re-password').val() == "") {
+                    $('#submit-pass').prop('disabled', true);
+                    $('#message').hide();
+                } else if ($('#password').val() == $('#re-password').val()) {
+                    $('#submit-pass').prop('disabled', false);
+                    $('#message').show().html('Mot de passe identiques').css('color', 'green');
+                } else {
+                    $('#submit-pass').prop('disabled', true);
+                    $('#message').show().html('Mot de passe différents').css('color', 'red');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

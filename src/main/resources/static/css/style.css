@@ -1,0 +1,46 @@
+/*!
+ * Style Compte Usager-Client
+ */
+ 
+ .div-detail{
+    background-color: #f3f3f3;
+    border-radius: 2px;
+ }
+ 
+ .span-detail{
+ 	color: #C55206;
+	text-transform: uppercase;
+	font-weight: bold;
+ }
+  
+ .uppercase{
+ 	text-transform: uppercase;
+ }
+ 
+  .capital{
+ 	text-transform: capitalize;
+ }
+ 
+ .input-detail{
+ 	border: none;
+ 	size: 500px;
+ }
+ 
+ .input-detail:disabled{
+	background: none;
+	color: #C55206;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+ }
+ 
+ input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type=number] {
+        -moz-appearance: textfield;
+        /* Firefox */
+      }
+ 

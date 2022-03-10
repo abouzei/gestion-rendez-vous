@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'succes','Succès création utilisateur')}">
+<meta charset="utf-8">
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page">
+        <div class="container-tight">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Utilisateur crée avec succès</h2>
+		    <p class="text-center">
+		    	<a th:href="@{/login}">Connectez-vous</a>
+		    </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeUtilisateur','Liste des utilisateurs')}">
+<meta charset="utf-8">
+
+<body class="antialiased">
+            <div class="page-body">
+                <div class="container-fluid">
+                	<div class="card">
+                		<div class="card-header">
+                			 <div class="row align-items-center">
+                			 	<div class="col">
+					                <h2 class="page-title">
+					                  Utilisateur
+					                </h2>
+					                 <div class="page-pretitle">
+					                  
+					                </div>
+				             	 </div>
+                			 </div>
+                		</div>					  
+          				<div class="card-body">
+          					<div class="table-responsive">
+          						<table class="table" id="tableUtilisateur">
+          							 <thead>
+          							 	<tr>
+          							 		<td>Matricule</td>
+          							 		<td>Nom</td>
+          							 		<td>Prénom</td>
+          							 		<td>Genre </td>
+          							 		<td>Direction</td>       							 		
+          							 	</tr>
+          							 </thead>
+          							 <tbody>
+										<tr >
+											<td/>
+											<td/>
+											<td/>
+											<td/>
+											<td>
+												<a class="btn btn-info">Update</a>												
+											</td>
+										</tr>
+									</tbody>
+          						</table>
+          					</div>
+          				</div>
+                	</div>
+                </div>
+            </div>
+     <div th:replace="/fragments/common_admin.html :: scripts" >
+  	</div>
+  	<script>
+	  	$(document).ready(function() {
+	  	    $('#tableUtilisateur').DataTable( {
+	  	        "language": {
+	  	            "lengthMenu": "Affichage _MENU_ utilisateurs",
+	  	            "zeroRecords": "Nothing found - sorry",
+	  	            "info": "Showing page _PAGE_ of _PAGES_",
+	  	            "infoEmpty": "No records available",
+	  	            "infoFiltered": "(filtered from _MAX_ total records)",
+	  	            "sSearch": "Recherche :"
+	  	        }
+	  	    } );
+	  	} );
+	</script>
+</body>
+
+</html>

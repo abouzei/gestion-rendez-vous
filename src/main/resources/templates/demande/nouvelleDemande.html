@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{fragments/layout :: layout (~{::body},'nouvelleDemande','Nouvelle demande de rendez-vous')}">
+<meta charset="utf-8">
+<body>
+    <div class="container-xl">
+        <div class="page-header d-print-none">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="page-title mb-3">
+                        FORMULAIRE DE DEMANDE DE RENDEZ-VOUS USAGER-CLIENT
+                    </h2>
+                    <div class="alert alert-danger alert-dismissible" role="alert" th:if="${erreurs != null && !erreurs.isEmpty}">
+                        <ul>
+                            <li class="alert-title" th:each="erreur :${erreurs}" th:text="${erreur}"></li>
+                        </ul>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards">
+                <div class="col-md-12">
+                    <form th:action="@{/demande/soumettreDemande}" method="post" th:object="${demande}" class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Etat Civil usager-client</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="numcni" class="form-label required">Numéro CNI</label>
+                                        <input type="text" class="form-control uppercase" id="numcni" th:field="*{utilisateur.numPieceIdentite}" required>
+                                        <div th:if="${erreurPiece} != null" class="erreur">
+                                            <span th:text="${erreurPiece}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nomu" class="form-label required">Nom</label>
+                                        <input type="text" class="form-control capital" id="nom" th:field="*{utilisateur.nom}" required minlength="2">
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-label required">Genre</div>
+                                        <select class="form-select" id="genre" th:field="*{utilisateur.genre}" required>
+						                        <option value="">Selectionner le genre...</option>
+						                        <option value="Homme" th:selected="(*{utilisateur.genre}=='Homme')">Homme</option>
+						                        <option value="Femme" th:selected="(*{utilisateur.genre}=='Femme')">Femme</option>
+						                    	</select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-label required">Profession</div>
+                                        <select class="form-select" id="profession" th:field=*{utilisateur.profession.id} required>
+							                        <option value=''>Selectionner la profession...</option>
+							                        <option th:each="profession : ${professions}" th:value="${profession.id}"
+							                            th:text="${profession.libelleProfession}"></option>
+							                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="datecni" class="form-label required">Date de validité CNI</label>
+                                        <div class="datepicker date input-group shadow-sm">
+                                            <input type="text" placeholder="Choisir une date" class="input-date-picker form-control" id="dateCni" th:field="*{utilisateur.dateEtablissemenPieceIdentite}" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Prénom</label>
+                                        <input type="text" class="form-control capital" id="prenom" th:field="*{utilisateur.prenom}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-label">Tranche d'âge</div>
+                                        <select class="form-select" id="tranche" th:field="*{utilisateur.trancheAge}">
+							                        <option value="">Selectionner la tranche d'age...</option>
+							                        <option th:each="tranche : ${T(ci.mfpma.dq.entites.TrancheAge).values()}"
+							                        		th:value="${tranche}"
+							                        		th:text="${tranche.getTranche()}">
+							                        </option>
+							                   </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Entreprise / Société / Ministère</label>
+                                        <input type="text" class="form-control" id="employeur" th:field="*{utilisateur.employeur}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="card-title">Adresse Géographique</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <div class="form-label required">Ville</div>
+                                        <select class="form-select" id="ville" th:field=*{utilisateur.ville.id} required>
+							                        <option value=''>Selectionner la ville...</option>
+							                        <option th:each="ville : ${villes}" th:value="${ville.id}"
+							                            th:text="${ville.libelleVille}"></option>
+							                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="card-title">Contacts</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="telephone" class="form-label required">Téléphone</label>
+                                        <input type="number" class="form-control" id="telephone" th:field="*{utilisateur.telephone}" placeholder="saisir seulement les 10 chiffres" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" th:field="*{utilisateur.email}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="card-title">Informations demande</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="directions" class="form-label required">Direction</label>
+                                        <select id="directions" class="form-control" th:field="*{direction.id}" required>
+														<option value=''>Selectionner la direction ...</option>
+														<option th:each="ob:${directions}" th:value="${ob[0]}"
+																th:text="${ob[1]}" /></option>
+												</select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="dateRdv" class="form-label required">Date</label>
+                                        <div class="datepicker date input-group shadow-sm">
+                                            <input type="text" placeholder="Choisir une date" class="input-date-picker form-control" id="dateRdv" th:field="*{dateRendezVous}" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <div class="form-label required">Tranche horaire</div>
+                                        <select id="tranches" class="form-control" th:field="*{trancheHoraire.id}" required>
+														<option value=''>Selectionner la tranche ..</option>
+												  </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label class="form-label">Motif</label>
+                                    <textarea class="form-control" data-bs-toggle="autosize" id="motif" th:field="*{motif}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                                    <label class="form-check-label required" for="invalidCheck">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#conditionGenerale">
+                                                    J'accepte les conditions
+                                                </a>
+                                            </label>
+                                </div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="reset" class="btn btn-warning">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Soumettre</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="modal modal-blur fade" id="conditionGenerale" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Soumettre votre demande</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    les Conditions relative à la soumission d'une demande de rendez-vous
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

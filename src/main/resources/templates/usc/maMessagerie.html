@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'maMessagerie','Echangez avec nous')}">
+<meta charset="utf-8">
+
+<body class="antialiased">
+    <div class="page-body ">
+        <div class="container-xl d-flex flex-column justify-content-center ">
+            <div class="col-md-12">
+                <form action="https://httpbin.org/post" method="post" class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Communiquez avec nous</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <input type="text" id="from" class="form-control" placeholder="Choose a nickname" />
+                                        <div class="btn-group">
+                                            <button type="button" id="connect" class="btn btn-sm btn-outline-secondary" onclick="connect()">Connect</button>
+                                            <button type="button" id="disconnect" class="btn btn-sm btn-outline-secondary" onclick="disconnect()" disabled>Disconnect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="users" style="display: none;">
+                                    <span id="active-users-span"></span>
+                                    <ul id="active-users" class="list-group list-group-horizontal-sm">
+                                        <!--/*-->
+                                        <!--/*/
+                                            <div th:with="condition=${#lists.size(activeUsers)}" th:remove="tag">
+                                                <p th:if="${condition}"><i>No active users found.</i></p>
+                                                <p th:unless="${condition}" class="text-muted">click on user to begin chat</p>
+                                            </div>
+                                            <li th:each="username ${activeUsers}" class="list-group-item">
+                                                <a class="active-user" href="javascript:void(0)" onclick="setSelectedUser('${username}')">${username}</a>
+                                            </li>
+                                            /*/-->
+                                        <!--*/-->
+                                    </ul>
+                                </div>
+                                <div id="divSelectedUser" class="mb-3" style="display: none;">
+                                    <span id="selectedUser" class="badge badge-secondary"></span> Selected
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group" id="sendmessage" style="display: none;">
+                                        <input type="text" id="message" class="form-control" placeholder="Message">
+                                        <div class="input-group-append">
+                                            <button id="send" class="btn btn-primary" onclick="send()">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{fragments/layout :: layout (~{::body},'succesDemande','Demande soumise avec succès')}">
+<meta charset="utf-8">
+<body>
+    <div class="container-xl">
+    </div>
+    <div class="page-body">
+        <div class="container-xl d-flex flex-column justify-content-center">
+            <div class="empty border rounded-2 border-success">
+                <p class="empty-title">Votre demande a été soumise avec succès</p>
+                <p class="empty-subtitle text-muted">
+                    Vos identifiants de connexions vous ont été transmis par <b>SMS</b>  et par <b>Email</b>.
+                </p>
+                <div class="empty-action">
+                    <a th:href="@{/login}" class="btn btn-primary">
+                         Connectez-vous
+                    </a>
+                </div>
+            </div>
+        </div>
+   </div>
+</body>
+
+</html>

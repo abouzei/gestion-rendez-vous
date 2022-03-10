@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'mesDemandes','mes demandes de rendez-vous')}">
+<meta charset="utf-8">
+
+<body class="antialiased">
+    <div class="page-body">
+        <div class="container-xl d-flex flex-column justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">LISTE DE MES DEMANDES DE RENDEZ-VOUS</div>
+                    </div>
+                    <div class="card-table table-responsive">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th width="10%">Réference</th>
+                                    <th width="15%">Date Soumission</th>
+                                    <th width="30%">Direction demande</th>
+                                    <th width="15%">Date Rendez-vous</th>
+                                    <th width="15%">Tranche horaire</th>
+                                    <th width="10%">Statut</th>
+                                    <th width="10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="demande : ${demandes}">
+                                    <td><span th:text="${demande.reference}"></span></td>
+                                    <td><span th:text="${demande.dateCreation}"></span></td>
+                                    <td><span th:text="${demande.direction.libelleDirection}"></span></td>
+                                    <td><span th:text="${demande.dateRendezVous}"></span></td>
+                                    <td><span th:text="${demande.trancheHoraire.libelleHeureDebutTrancheHoraire}+' - '+${demande.trancheHoraire.libelleHeureFinTrancheHoraire}"></span>
+                                    </td>
+                                    <td th:classappend="${demande.statut}"><span th:text="${demande.statut}"></span>
+                                    </td>
+                                    <td><a class="btn btn-warning" th:href="@{'/usc/detailDemande/'+${demande.Id}}">Details</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

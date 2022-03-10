@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'messageReinitialisation','Message de réinitialisation du mot de passe')}">
+<meta charset="utf-8">
+
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page">
+        <div class="container-tight">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4"><span th:text="${titre}"></span></h2>
+		    <p class="text-center">
+		    	<span th:text="${message}"></span>
+		    </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

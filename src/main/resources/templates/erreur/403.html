@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'','Ressource non disponible')}">
+
+<meta charset="utf-8">
+  <body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        <div class="empty">
+          <div class="empty-header">403</div>
+          <p class="empty-title">Oops… Page Erreur</p>
+          <p class="empty-subtitle text-muted">
+            Vous n'êtes pas autorisé a consulter cette page
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

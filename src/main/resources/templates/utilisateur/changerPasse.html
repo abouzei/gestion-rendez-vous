@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'changerPasse','Changement du mot de passe')}">
+<meta charset="utf-8">
+
+  <body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        <form class="card card-md" action="." method="get">
+            <input type="hidden" name="token" th:value="${token}"/>
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Réinitialiser votre mot de passe</h2>
+            <div class="mb-3">
+              <label class="form-label">Nouveau mot depasse</label>
+              <input type="password" class="form-control" name="password" id="password" autofocus="autofocus" required>
+            </div>     
+            <div class="mb-3">
+              <label class="form-label">Confirmer nouveau mot depasse</label>
+              <input type="password" class="form-control" oninput="checkPasswordMatch(this);">
+            </div>
+            <div class="form-footer">
+              <a type="submit" class="btn btn-primary w-100">                
+                Modifier
+              </a>
+            </div>
+          </div>
+        </form>
+        <div class="text-center text-muted mt-3">
+          <a th:href="@{/login}">Retour</a> à l'écran de connexion.
+        </div>
+      </div>
+    </div>
+  <script type="text/javascript">
+	function checkPasswordMatch(confirmPassword) {
+		if (confirmPassword.value != $("#password").val()) {
+			confirmPassword.setCustomValidity("Les mot de passe ne sont identiques !");
+		} else {
+			confirmPassword.setCustomValidity("");
+		}
+	}
+</script>
+  </body>
+</html>

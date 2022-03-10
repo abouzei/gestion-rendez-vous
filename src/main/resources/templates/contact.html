@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'contact','Contactez nous')}">
+<meta charset="utf-8">
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <form class="card card-md" th:action="@{/envoyerMessage}" method="post" autocomplete="off">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Contactez nous</h2>
+                    <div class="mb-3">
+                        <label for="nomcomplet" class="form-label">Nom et prénom</label>
+                        <input type="text" class="form-control" name="nomcomplet" minlength="5" maxlength="50">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse email</label>
+                        <input type="email" class="form-control" placeholder="Entrez votre adresse email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Objet</label>
+                        <input type="text" class="form-control" name="objet">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" data-bs-toggle="autosize" name="contenu" maxlength="200"></textarea>
+                    </div>
+                    <div class="form-footer">
+                        <input type="submit" class="btn btn-primary w-100" value="Envoyer">
+                    </div>
+                </div>
+                <div class="hr-text"></div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

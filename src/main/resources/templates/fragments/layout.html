@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	  th:fragment="layout(contenu, actif, titre)">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title th:text="${titre}"></title>
+		<!-- CCSS APPLICATION -->
+		<link rel="stylesheet" th:href="@{/css/all-style.css}">
+		<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}">
+		<link rel="stylesheet" th:href="@{/css/fullcalendar.css}">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+		<link rel="stylesheet" th:href="@{/css/style-dp.css}">
+		<link rel="stylesheet" th:href="@{/css/style-table.css}">
+	</head>
+	<body class="antialiased">
+   		 <div class="wrapper">		 	
+   		   	<div sec:authorize="isAuthenticated()"> 
+   		   		<th:block>
+	   		 		<header th:replace="fragments/menu-utilisateur :: topmenu"></header>	
+	   		 	</th:block>		   	
+	   		 	<th:block sec:authorize="hasRole('ROLE_USAGER-CLIENT')">
+	   		 		<header th:replace="fragments/menu-usc :: menu(${actif})"></header>
+	   		 	</th:block>
+   		   	</div>
+   		   	<div sec:authorize="isAnonymous()">
+   		   		<header th:replace="fragments/menu :: menu(${actif})"></header>
+   		   	</div>
+   		 	<div class="page-wrapper">
+               <th:block th:include="${contenu}"></th:block> 		 	
+   		 	</div> 		 	 		 	
+         	<footer th:replace="fragments/footer :: footer">
+   			</footer>
+   		 </div>
+   	<!--JS APPLICATION-->
+   	<script th:src="@{/js/jquery.js}"></script>
+   	<script type="text/javascript" th:src="@{/js/all-script.js}"></script>
+   	<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+   	<script type="text/javascript" th:src="@{/js/fr.js}"></script>
+   	<script type="text/javascript" th:src="@{/js/fullcalendar.js}"></script>
+   	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	</body>
+</html>

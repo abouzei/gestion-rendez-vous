@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'connexion','Connectez-vous')}">
+
+<meta charset="utf-8">
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <form class="card card-md" th:action="@{/login}" method="post" autocomplete="off">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Connexion à votre compte</h2>
+                    <div class="alert alert-danger" th:if="${param.error}" role="alert">
+                        <div class="text-center">
+                            <h3 class="alert-title">Adresse email ou mot de passe incorrect</h3>
+                        </div>
+                    </div>
+                    <div class="alert alert-success" th:if="${param.logout}" role="alert">
+                        <div class="text-center">
+                            <h3 class="alert-title">Vous avez été deconnecté avec succès.</h3>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Adresse email</label>
+                        <input type="email" class="form-control" id="email" name="username" placeholder="Entrez votre adresse email">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">
+                            Mot de passe
+                            <span class="form-label-description">
+                                <a th:href="@{/utilisateur/passeOublier}">mot de passe oublié</a>
+                            </span>
+                        </label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-check">
+                            <input type="checkbox" class="form-check-input" />
+                            <span class="form-check-label">Restez connecter</span>
+                        </label>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100">Connectez-vous</button>
+                    </div>
+                </div>
+                <div class="hr-text"></div>
+            </form>
+            <div class="text-center text-muted mt-3">
+                Vous avez un soucis ? <a th:href="@{/contact}">ici</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
