@@ -1,6 +1,9 @@
 package ci.mfpma.dq.controller;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
+import ci.mfpma.dq.utilitaires.SendEmailLoginPasse;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
 
@@ -35,6 +39,9 @@ public class DemandeController {
 	
 	@Autowired
 	private DemandeService demandeService;
+	
+	@Autowired
+	SendEmailLoginPasse sendLoginPasse;
 	
 	@GetMapping("/nouvelleDemande") 
 	public String getNouvelleDemande(Model model) {
@@ -76,7 +83,12 @@ public class DemandeController {
 		Demande demandeCree = demandeService.save(demande);
 		demandeCree.setReference(Utilitaires.referenceDemande(demandeCree.getId()));
 		demandeService.save(demandeCree);
-		return "demande/successDemande";
+		try {
+			sendLoginPasse.sendMessage(demandeCree.getUtilisateur());
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			e.printStackTrace();
+		}
+		return "demande/succesDemande";
 	}
 	
 

@@ -78,5 +78,4 @@ private static final long serialVersionUID = 1L;
 	public boolean hasRole(String roleName) {
 		return utilisateur.hasRole(roleName);
 	}
-
 }

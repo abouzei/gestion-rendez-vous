@@ -24,7 +24,7 @@ public class AdminController {
 	@Autowired
 	DirectionService directionService;
 	
-	@GetMapping("/accueil")
+	@GetMapping("/accueilAdmin")
 	public String getAccueilAdmin() {
 		return "admin/accueil";
 	}

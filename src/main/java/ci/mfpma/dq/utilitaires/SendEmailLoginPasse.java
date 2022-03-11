@@ -9,33 +9,35 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import ci.mfpma.dq.entites.Utilisateur;
+
 @Component
 public class SendEmailLoginPasse {
 	
 	@Autowired
 	JavaMailSender emailSender;
 	
-	public void sendMessage(String destinataire, String lien) throws MessagingException, UnsupportedEncodingException {
+	public void sendMessage (Utilisateur utilisateur) throws MessagingException, UnsupportedEncodingException {
 
 	    MimeMessage message = emailSender.createMimeMessage();              
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
 	     
 	    helper.setFrom("zeibadjo@gmail.com", "WebMaster");
-	    helper.setTo(destinataire);
+	    helper.setTo(utilisateur.getEmail());
 	     
-	    String subject = "Here's the link to reset your password";
+	    String subject = "LOGIN ET MOT DE PASSE";
 	     
-	    String content = "<p>Hello,</p>"
-	            + "<p>You have requested to reset your password.</p>"
-	            + "<p>Click the link below to change your password:</p>"
-	            + "<p><a href=\"" + lien + "\">Change my password</a></p>"
+	    String content = "<p>Bonjour ,</p>"
+	            + "<p>Vous avez été enregistré dans notre base de données après avoir soumis une demande.</p>"
+	            + "<p>de rendez-vous. Les identifiants vous permettant de suivre votre demande sont les suivants : </p>"
+	            + "<p>Login : <b>" + utilisateur.getEmail() + "</b></p>"
+	    	    + "<p>Mot de passe : <b>" + utilisateur.getTelephone() + "</b></p>"
 	            + "<br>"
-	            + "<p>Ignore this email if you do remember your password, "
-	            + "or you have not made the request.</p>";
+	            + "<p>Merci,";
 	     
 	    helper.setSubject(subject);
 		     
 		helper.setText(content, true);
-		this.emailSender.send(message);
+		emailSender.send(message);
 	}
 }

@@ -1,37 +1,76 @@
-<th:block th:fragment="menu">
-        <div class="navbar-expand-md">
+<th:block th:fragment="menu(actif)">
+<div class="navbar-expand-md">
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="navbar navbar-light">
                     <div class="container-fluid">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="./index.html">
+                            <li class="nav-item" th:classappend="${actif} == 'accueil' ? 'active':''">
+                                <a class="nav-link" th:href="@{/}">
                                     <span class="nav-link-title">
                                         Accueil
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                                    <span class="nav-link-title">
-                                        Extra
-                                    </span>
+                                        Demandes
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="./music.html">
-                                        Music
-                                    </a>
-                                    <a class="dropdown-item" href="./widgets.html">
-                                        Widgets
-                                    </a>
-                                    <a class="dropdown-item" href="./wizard.html">
-                                        Wizard
-                                    </a>
+                                    <a class="dropdown-item" href="./widgets.html">Calendrier</a>
+                                    <a class="dropdown-item" th:classappend="${actif} == 'listeDemande' ? 'active':''" th:href="@{/cruc/listeDemande}" >Listes</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown" th:classappend="${actif} == 'listeUsagerClient' ? 'active':''">
+                                <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                        Usager-Client
+                                </a>                       
+                            </li>
+                            <li class="nav-item" th:classappend="${actif} == 'direction' ? 'active':''">
+                                <a class="nav-link" href="#navbar-extra" role="button" aria-expanded="false">
+                                Directions
+                            	</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#navbar-extra" role="button" aria-expanded="false">
+                                    Evenements
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="./music.html">Nouvel Evenement</a>
+                                    <a class="dropdown-item" href="">Listes</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                       Notifications
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="./music.html">SMS</a>
+                                    <a class="dropdown-item" href="./widgets.html">Email</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                    Statistiques
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="./music.html">Etats</a>
+                                    <a class="dropdown-item" href="./widgets.html">Rapports</a>
+                                </div>
+                            </li>
+                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                    Paramètres
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="./music.html">Generale</a>
+                                    <a class="dropdown-item" href="./widgets.html">Notifications</a>
+                                     <a class="dropdown-item" href="./music.html">Tables</a>
+                                    <a class="dropdown-item" th:href="@{/admin/listeUtilisateur}" th:classappend="${actif} == 'listeUtilisateur' ? 'active':''">Utilisateurs et droits d'accès</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>	
+        </div>			
 </th:block>

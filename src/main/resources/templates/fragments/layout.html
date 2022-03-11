@@ -13,6 +13,18 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}">
 		<link rel="stylesheet" th:href="@{/css/style-dp.css}">
 		<link rel="stylesheet" th:href="@{/css/style-table.css}">
+		<link rel="stylesheet" th:href="@{/css/datatable.css}">
+		<link rel="stylesheet" th:href="@{/css/datatb.css}" />
+		
+		 	<!--JS APPLICATION-->
+	   	<script th:src="@{/js/jquery.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/all-script.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/fr.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/fullcalendar.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	   	<script type="text/javascript" th:src="@{/js/datatb.js}"></script>
+</head>
 	</head>
 	<body class="antialiased">
    		 <div class="wrapper">		 	
@@ -20,8 +32,11 @@
    		   		<th:block>
 	   		 		<header th:replace="fragments/menu-utilisateur :: topmenu"></header>	
 	   		 	</th:block>		   	
-	   		 	<th:block sec:authorize="hasRole('ROLE_USAGER-CLIENT')">
+	   		 	<th:block sec:authorize="hasAuthority('USAGER-CLIENT')">
 	   		 		<header th:replace="fragments/menu-usc :: menu(${actif})"></header>
+	   		 	</th:block>
+	   		 	<th:block sec:authorize="hasAuthority('ADMIN')">
+	   		 		<header th:replace="fragments/menu-admin :: menu(${actif})"></header>
 	   		 	</th:block>
    		   	</div>
    		   	<div sec:authorize="isAnonymous()">
@@ -33,12 +48,5 @@
          	<footer th:replace="fragments/footer :: footer">
    			</footer>
    		 </div>
-   	<!--JS APPLICATION-->
-   	<script th:src="@{/js/jquery.js}"></script>
-   	<script type="text/javascript" th:src="@{/js/all-script.js}"></script>
-   	<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
-   	<script type="text/javascript" th:src="@{/js/fr.js}"></script>
-   	<script type="text/javascript" th:src="@{/js/fullcalendar.js}"></script>
-   	<script type="text/javascript" th:src="@{/js/script.js}"></script>
 	</body>
 </html>
