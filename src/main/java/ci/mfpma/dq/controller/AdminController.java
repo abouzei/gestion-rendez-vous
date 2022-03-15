@@ -1,7 +1,10 @@
 package ci.mfpma.dq.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ci.mfpma.dq.entites.Utilisateur;
 import ci.mfpma.dq.service.DirectionService;
+import ci.mfpma.dq.service.RoleService;
 import ci.mfpma.dq.service.UtilisateurService;
+import ci.mfpma.dq.utilitaires.SendEmailUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,6 +29,12 @@ public class AdminController {
 	@Autowired
 	DirectionService directionService;
 	
+	@Autowired
+	RoleService roleService;
+	
+	@Autowired
+	SendEmailUtil sendEmailUtil;
+	
 	@GetMapping("/accueilAdmin")
 	public String getAccueilAdmin() {
 		return "admin/accueil";
@@ -31,7 +42,7 @@ public class AdminController {
 	
 	@GetMapping("/listeUtilisateur")
 	public String getListeUtilisateur(Model model) {
-		model.addAttribute("utilisateurs", utilisateurService.findListUserByRole(4L));
+		model.addAttribute("utilisateurs", utilisateurService.getAll());
 		return "admin/listeUtilisateur";
 	}
 	
@@ -39,6 +50,7 @@ public class AdminController {
 	public String getNouvelUtilisateur(Model model) {
 		model.addAttribute("directions", directionService.getAllDirectionsAsc());
 		model.addAttribute("utilisateur", new Utilisateur());
+		model.addAttribute("roles", roleService.findAllByOrderByNomRoleAsc());
 		return "admin/nouvelUtilisateur";
 	}
 	
@@ -52,9 +64,17 @@ public class AdminController {
 			erreurs.add("Ce numéro de téléphone existe déjà");
 		}
 		if(!erreurs.isEmpty()) {
+			model.addAttribute("directions", directionService.getAllDirectionsAsc());
+			model.addAttribute("roles", roleService.findAllByOrderByNomRoleAsc());
+			model.addAttribute("erreurs", erreurs);
 			return "admin/nouvelUtilisateur";
 		}
-		utilisateurService.saveUtilisateur(utilisateur);
+		///utilisateurService.saveUtilisateur(utilisateur);
+		try {
+			sendEmailUtil.sendMessage(utilisateur);
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			e.printStackTrace();
+		}
 		return "redirect:/admin/listeUtilisateur";
 	}
 

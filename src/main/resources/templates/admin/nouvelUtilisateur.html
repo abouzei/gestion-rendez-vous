@@ -1,75 +1,85 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body}, 'nouvelUtilisateur','Création nouvel utilisateur')}">
 <meta charset="utf-8">
 
-<body class="antialiased border-top-wide border-primary d-flex flex-column">
-    <div class="page page-center">
-        <div class="container-tight py-4">
-            <form class="card card-md" method="post" th:action="@{/admin/creerUtilisateur}" th:object="${utilisateur}">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Création d'un nouvel utilisateur</h2>
-                    <div class="alert alert-danger alert-dismissible" role="alert" th:if="${erreurs != null && !erreurs.isEmpty}">
-					    <ul>
-					    	<li class="alert-title" th:each="erreur :${erreurs}" th:text="${erreur}"></li>
-					    </ul>
-					    <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-					</div>  
-                    <div class="mb-3">
-                        <label class="form-label required">Nom</label>
-                        <input type="text" class="form-control" th:field="*{nom}" required minlength="2">
-                    </div><div class="mb-3">
-                        <label class="form-label required">Prénom</label>
-                        <input type="text" class="form-control" th:field="*{prenom}" required>
+<body>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-sm-center h-100 mb-4">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <h1 class="fs-4 card-title fw-bold mb-4 text-center">Nouvel Utilisateur</h1>
+                            <div class="alert alert-danger" role="alert" th:if="${erreurs != null && !erreurs.isEmpty}">
+                                <ul>
+                                    <li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
+                                </ul>
+                            </div>
+                            <form method="post" th:action="@{/admin/creerUtilisateur}" th:object="${utilisateur}">
+                                <div class='mb-3'>
+                                    <label class="form-label required" for="name">Nom</label>
+                                    <input type="text" class="form-control" th:field="*{nom}" required minlength="2" id="nom">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required" for="name">Prénom</label>
+                                    <input type="text" class="form-control" th:field="*{prenom}" required id="prenom">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required" for="password">Adresse email</label>
+                                    <input type="email" class="form-control" th:field="*{email}" required id="email">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required" for="password">Numéro de téléphone</label>
+                                    <input type="number" class="form-control" th:field="*{telephone}" placeholder="saisir seulement les 10 chiffres" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" id="telephone">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required">Direction</label>
+                                    <select id="directions" class="form-control" th:field="*{direction.id}" required>
+										<option value="">Selectionner la direction ...</option>
+										<option th:each="direction :${directions}" th:value="${direction.id}"
+											th:text="${direction.libelleDirection}" />
+										</option>
+									</select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label required">Profil</label>
+                                    <select class="form-control" required name="roles" id="profil">
+										<option value="">Selectionner le profil...</option>
+										<option th:each="role :${roles}" th:value="${role.id}"
+											th:text="${role.nomRole}" />
+										</option>
+									</select>
+                                </div>
+                                <div class='align-items-center d-flex'>
+                                    <button type="submit" class="btn btn-primary ms-auto" id="btnValider">
+										Créer
+									</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label required">Adresse email</label>
-                        <input type="email" class="form-control" th:field="*{email}" required>                     
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label required">Cellulaire</label>
-                        <input type="number" class="form-control" th:field="*{telephone}" placeholder="saisir seulement les 10 chiffres"  required
-                                                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label required">Direction</label>
-                          <select id="directions" class="form-control"  th:field="*{direction.id}" required>
-								<option value="">Selectionner la direction ...</option>
-								<option th:each="direction :${directions}" th:value="${direction.id}"
-										th:text="${direction.libelleDirection}" /></option>
-						 </select>
-                    </div>                        
-                    <div class="form-group mt-2">
-                     <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                          <label class="form-check-label required" for="invalidCheck">
-                              <a href="#" data-bs-toggle="modal" data-bs-target="#conditionUtilisateur">
-                                  J'accepte les conditions
-                              </a>
-                          </label>
-                      </div>
-                 	 </div>
-                    <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Créer</button>
-                    </div>
-                </div>
-                <div class="hr-text"></div>
-            </form>
-        </div>
-    </div>
-     <div class="modal modal-blur fade" id="conditionUtilisateur" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Création d'un utilisateur</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    les Conditions relative à la création d'un utilisateur
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('form').submit(function() {
+                $.blockUI({
+                    message: 'Patientez ....',
+                    css: {
+                        border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        opacity: .5,
+                        color: '#fff'
+                    }
+                });
+                setTimeout($.unblockUI, 4000);
+            });
+        });
+    </script>
 </body>
+
 </html>

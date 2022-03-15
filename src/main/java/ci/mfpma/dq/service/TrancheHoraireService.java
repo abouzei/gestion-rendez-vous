@@ -11,7 +11,7 @@ public interface TrancheHoraireService {
 	
 	void save(TrancheHoraire trancheHoraire);
 	
-	TrancheHoraire getById(Long TrancheHoraireId);
+	TrancheHoraire getById(Long Id);
 	
 	void deleteById(TrancheHoraire trancheHoraire);
 	

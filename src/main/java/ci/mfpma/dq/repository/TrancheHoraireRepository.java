@@ -10,6 +10,6 @@ import ci.mfpma.dq.entites.TrancheHoraire;
 
 public interface TrancheHoraireRepository extends JpaRepository<TrancheHoraire, Long>{
 	
-	@Query("SELECT t.id ,t.libelleHeureDebutTrancheHoraire, t.libelleHeureFinTrancheHoraire FROM TrancheHoraire t WHERE t.id NOT IN (SELECT d.trancheHoraire.id FROM Demande d WHERE d.direction.id = :id AND d.dateRendezVous = :date AND (d.statut = 'SOUMIS' OR d.statut = 'PROGRAMMER' OR d.statut = 'CONFIRMER') )")
+	@Query("SELECT t.id ,t.libelleHeureDebut, t.libelleHeureFin FROM TrancheHoraire t WHERE t.id NOT IN (SELECT d.trancheHoraire.id FROM Demande d WHERE d.direction.id = :id AND d.dateRendezVous = :date AND (d.statut = 'SOUMIS' OR d.statut = 'PROGRAMMER' OR d.statut = 'CONFIRMER') )")
 	public List<Object[]> getAllFreeTranches(@Param("id") Long id, @Param("date") String dateRdv);
 }

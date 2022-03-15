@@ -17,7 +17,7 @@ import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailLoginPasse;
+import ci.mfpma.dq.utilitaires.SendEmailNouvelleDemande;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
 
@@ -41,7 +41,7 @@ public class DemandeController {
 	private DemandeService demandeService;
 	
 	@Autowired
-	SendEmailLoginPasse sendLoginPasse;
+	SendEmailNouvelleDemande sendEmail;
 	
 	@GetMapping("/nouvelleDemande") 
 	public String getNouvelleDemande(Model model) {
@@ -84,7 +84,7 @@ public class DemandeController {
 		demandeCree.setReference(Utilitaires.referenceDemande(demandeCree.getId()));
 		demandeService.save(demandeCree);
 		try {
-			sendLoginPasse.sendMessage(demandeCree.getUtilisateur());
+			sendEmail.sendMessage(demandeCree);
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			e.printStackTrace();
 		}

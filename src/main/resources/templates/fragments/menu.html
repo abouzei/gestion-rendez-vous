@@ -1,42 +1,38 @@
 <th:block th:fragment="menu(actif)">
-<div class="navbar-expand-md">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
-           		<span class="navbar-toggler-icon"></span>
-          	</button>
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <div class="navbar navbar-light">
-                    <div class="container-xl">
-                        <ul class="navbar-nav">
-                            <li class="nav-item" th:classappend="${actif} == 'accueil' ? 'active':''">
-                                <a class="nav-link" th:href="@{/}">
-                                    <span class="nav-link-title">
-                                        Accueil
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item" th:classappend="${actif} == 'nouvelleDemande' ? 'active':''">
-                                <a class="nav-link" th:href="@{/demande/nouvelleDemande}" role="button">
-                                Nouvelle demande
-                            	</a>
-                            </li>
-                              <li class="nav-item" th:classappend="${actif} == 'nouvelleDemandeFonctionnaire' ? 'active':''">
-                                <a class="nav-link" th:href="@{/demande/nouvelleDemandeFonctionnaire}" role="button">
-                                Nouvelle demande Fonctionnaire
-                            	</a>
-                            </li>
-                             <li class="nav-item" th:classappend="${actif} == 'connexion' ? 'active':''">
-                                <a class="nav-link" th:href="@{/login}" role="button">
-                                Connexion
-                            	</a>
-                            </li>
-                            <li class="nav-item" th:classappend="${actif} == 'contact' ? 'active':''">
-                                <a class="nav-link" th:href="@{/contact}" role="button">
-                                Contactez-nous
-                            	</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5" aria-label="Eighth navbar example">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}" th:classappend="${actif} == 'accueil' ? 'active':''">
+              Accueil
+            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/demande/nouvelleDemande}" th:classappend="${actif} == 'nouvelleDemande' ? 'active':''">
+              Nouvelle demande
+            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/demande/nouvelleDemandeFonctionnaire}" th:classappend="${actif} == 'nouvelleDemandeFonctionnaire' ? 'active':''">
+              Nouvelle demande Fonctionnaire
+            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}" th:classappend="${actif} == 'connexion' ? 'active':''">
+              Connexion
+            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contact}" th:classappend="${actif} == 'contact' ? 'active':''">
+              Contactez-nous
+            </a>
+                    </li>
+                </ul>
             </div>
-        </div>			
+        </div>
+    </nav>
 </th:block>

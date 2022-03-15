@@ -19,7 +19,6 @@ import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.RoleService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailLoginPasse;
 import net.bytebuddy.utility.RandomString;
 
 
@@ -41,10 +40,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	
 	@Autowired
 	private RoleService roleService;
-	
-	@Autowired
-	SendEmailLoginPasse sendLoginPasse;
-
 
 	@Override
 	public List<Utilisateur> getAll() {
@@ -64,11 +59,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	public Utilisateur saveUtilisateur(Utilisateur utilisateur) {		
 		utilisateur.setDirection(directionService.getById(utilisateur.getDirection().getId()));
 		utilisateur.setMotDePasse(PasswordEncoder.passwordEncoder().encode(utilisateur.getTelephone()));
-		try {
-			sendLoginPasse.sendMessage(utilisateur);
-		} catch (UnsupportedEncodingException | MessagingException e) {
-			e.printStackTrace();
-		}
 		return utilisateurRepository.save(utilisateur);
 	}
 

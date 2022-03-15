@@ -35,12 +35,12 @@ public class ContactController {
 		
 
 		String  objetEmail = nomComplet+ " à envoyer un message";
-		String contenuEmail = "<p><b>Nom Expéditeur:</b> " + nomComplet +"</p>";
-		contenuEmail += "<p><b>Objet:<p><b> " +objet +"</p>";
-		contenuEmail += "<p><b>Message:<p><b> " +contenu +"</p>";
+		String contenuEmail = "<p><b>Nom Expéditeur :</b> " + nomComplet +"</p>";
+		contenuEmail += "<p><b>Objet :<p><b>" +objet +"</p>";
+		contenuEmail += "<p><b>Message :<p><b> " +contenu +"</p>";
 		
 		
-		helper.setFrom(emailSender,"Contact Konate");
+		helper.setFrom(emailSender,nomComplet);
 		helper.setTo("kon_abou_zei@yahoo.fr");	
 		helper.setSubject(objetEmail);
 		helper.setText(contenuEmail, true);

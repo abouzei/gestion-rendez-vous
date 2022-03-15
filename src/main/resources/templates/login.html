@@ -3,54 +3,55 @@
 
 <meta charset="utf-8">
 
-<body class="antialiased border-top-wide border-primary d-flex flex-column">
-    <div class="page page-center">
-        <div class="container-tight py-4">
-            <form class="card card-md" th:action="@{/login}" method="post" autocomplete="off">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Connexion à votre compte</h2>
-                    <div class="alert alert-danger" th:if="${param.error}" role="alert">
-                        <div class="text-center">
-                            <h3 class="alert-title">Adresse email ou mot de passe incorrect</h3>
+<body>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-sm-center h-100">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <h1 class="fs-4 card-title fw-bold mb-4 text-center">Connexion</h1>
+                            <form method="POST" class="needs-validation" autocomplete="off">
+                                <div class="alert alert-danger" th:if="${param.error}" role="alert">
+                                    <span class="alert-title">Adresse email ou mot de passe incorrect</span>
+                                </div>
+                                <div class="alert alert-success" th:if="${param.logout}" role="alert">
+                                    <span class="alert-title">Vous avez été deconnecté avec succès</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Adresse email</label>
+                                    <input id="email" type="email" class="form-control" name="username" value="" required autofocus>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="password">Mot de passe</label>
+                                    <a th:href="@{/utilisateur/passeOublier}" class="float-end">
+										Mot de passe oublié
+									</a>
+                                    <input id="password" type="password" class="form-control" name="password" required>
+                                </div>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                                        <label for="remember" class="form-check-label">Restez connecter</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary ms-auto">
+										Connectez-vous
+									</button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="alert alert-success" th:if="${param.logout}" role="alert">
-                        <div class="text-center">
-                            <h3 class="alert-title">Vous avez été deconnecté avec succès.</h3>
+                        <div class="card-footer py-3 border-0">
+                            <div class="text-center">
+                                Un soucis <a th:href="@{/contact}" class="text-dark">Contactez-nous</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Adresse email</label>
-                        <input type="email" class="form-control" id="email" name="username" placeholder="Entrez votre adresse email">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label">
-                            Mot de passe
-                            <span class="form-label-description">
-                                <a th:href="@{/utilisateur/passeOublier}">mot de passe oublié</a>
-                            </span>
-                        </label>
-                        <div class="input-group input-group-flat">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-check">
-                            <input type="checkbox" class="form-check-input" />
-                            <span class="form-check-label">Restez connecter</span>
-                        </label>
-                    </div>
-                    <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Connectez-vous</button>
                     </div>
                 </div>
-                <div class="hr-text"></div>
-            </form>
-            <div class="text-center text-muted mt-3">
-                Vous avez un soucis ? <a th:href="@{/contact}">ici</a>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>

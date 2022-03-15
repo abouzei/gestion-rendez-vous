@@ -1,121 +1,116 @@
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'monCompte','Informations personnelles')}">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{fragments/layout :: layout (~{::body},'monCompte','Informations personnelles')}">
 <meta charset="utf-8">
 
-<body class="antialiased">
-    <div class="page-body">
-        <div class="container-xl d-flex flex-column justify-content-center">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <form id="form1" th:action="@{/usc/modifierMonCompte}" method="post" th:object="${utilisateur}" class="card">
-                        <input type="hidden" th:field="*{id}">
-                        <div class="card-header">
-                            <h4 class="card-title">Informations Compte</h4>
-                        </div>
-                        <div>
-                            <div th:if="${erreurNumPiece} != null" class="erreur">
-                                <span th:text="${erreurNumPiece}"></span>
-                            </div>
-                            <div th:if="${erreurTelephone} != null" class="erreur">
-                                <span th:text="${erreurTelephone}"></span>
-                            </div>
-                            <div th:if="${erreurEmail} != null" class="erreur">
-                                <span th:text="${erreurEmail}"></span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="numcni" class="form-label required">Numéro CNI</label>
-                                        <input type="text" class="form-control" id="numcni" th:field="*{numPieceIdentite}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nom" class="form-label required">Nom</label>
-                                        <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-label required">Genre</div>
-                                        <select class="form-select" id="genre" th:field="*{genre}" required>
-                                            <option value="">Selectionner le genre...</option>
-                                            <option value="Homme" th:selected="(*{genre}=='Homme')">Homme</option>
-                                            <option value="Femme" th:selected="(*{genre}=='Femme')">Femme</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-label required">Profession</div>
-                                        <select class="form-select" id="profession" th:field=*{profession.id} required>
-                                            <option value=''>Selectionner la profession...</option>
-                                            <option th:each="profession : ${professions}" th:value="${profession.id}"
-                                                th:text="${profession.libelleProfession}"></option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-label">Ville</div>
-                                        <select class="form-select" id="ville" th:field=*{ville.id}>
-                                            <option value=''>Selectionner la ville...</option>
-                                            <option th:each="ville : ${villes}" th:value="${ville.id}"
-                                                th:text="${ville.libelleVille}"></option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="cellulaire" class="form-label required">Cellulaire</label>
-                                        <input type="number" class="form-control" id="cellulaire" th:field="*{telephone}" placeholder="saisir seulement les 10 chiffres" maxlength="10" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="datecni" class="form-label required">Date de validité CNI</label>
-                                        <div class="datepicker date input-group shadow-sm">
-                                            <input type="text" placeholder="Choisir une date" class="input-date-picker form-control" id="dateCni" th:field="*{dateEtablissemenPieceIdentite}" autocomplete="off" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Prénom</label>
-                                        <input type="text" class="form-control" id="prenom" th:field="*{prenom}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-label">Tranche d'âge</div>
-                                        <select class="form-select" id="tranche" th:field="*{trancheAge}">
-                                            <option value="">Selectionner la tranche d'age...</option>
-                                            <option th:each="tranche : ${T(ci.mfpma.dq.entites.TrancheAge).values()}"
-                                                th:value="${tranche}" th:text="${tranche.getTranche()}">
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Entreprise / Société / Ministère</label>
-                                        <input type="text" class="form-control" id="employeur" th:field="*{employeur}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label required">Email</label>
-                                        <input type="text" class="form-control" id="email" th:field="*{email}" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <input id="btnActiver" type="button" class="btn btn-primary" value="Activer" />
-                            <input id="btnModifier" type="submit" class="btn btn-success" value="Modifier" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script th:inline="javascript">
-        $(document).ready(function() {
-            $("#form1 :input").prop("disabled", true);
-            $("#btnActiver").attr('disabled', false);
-            $("#btnModifier").hide();
-        });
-        $("#btnActiver").click(function() {
-            $("#form1 :input").prop("disabled", false);
-            $("#btnActiver").hide();
-            $("#btnModifier").show();
-        });
-    </script>
+<body>
+	<div class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px;">
+		<div class="alert alert-danger" role="alert" th:if="${erreurs != null && !erreurs.isEmpty}">
+			<ul>
+				<li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
+			</ul>
+		</div>
+		<h5 class="pb-2 border-bottom mb-2">Informations personnelles</h5>
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-md-12 col-lg-12">
+					<form id="form1" th:action="@{/utilisateur/modifierMonCompte}" method="post"
+						th:object="${utilisateur}">
+						<input type="hidden" th:field="*{id}">
+						<div class="row g-2">
+							<div class="col-sm-6">
+								<label for="cni" class="form-label">Numéro CNI</label>
+								<input type="text" class="form-control uppercase" id="numcni"
+									th:field="*{numPieceIdentite}" required>
+							</div>
+							<div class="col-sm-6">
+								<label for="dateCni" class="form-label">Date validité CNI</label>
+								<input type="text" placeholder="Choisir une date" class="form-control" id="dateCni"
+									th:field="*{dateEtablissemenPieceIdentite}" autocomplete="off" required>
+							</div>
+							<div class="col-sm-6">
+								<label for="firstName" class="form-label">Nom</label>
+								<input type="text" class="form-control uppercase" id="nom" th:field="*{nom}" required>
+							</div>
+							<div class="col-sm-6">
+								<label for="firstName" class="form-label">Prénom</label>
+								<input type="text" class="form-control uppercase" id="prenom" th:field="*{prenom}">
+							</div>
+							<div class="col-sm-6">
+								<label for="firstName" class="form-label">Genre</label>
+								<select class="form-select uppercase" id="genre" th:field="*{genre}" required>
+									<option value="">Selectionner le genre...</option>
+									<option value="Homme" th:selected="(*{genre}=='Homme')">Homme</option>
+									<option value="Femme" th:selected="(*{genre}=='Femme')">Femme</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label for="firstName" class="form-label">Tranche d'âge</label>
+								<select class="form-select uppercase" id="tranche" th:field="*{trancheAge}">
+									<option value="">Selectionner la tranche d'age...</option>
+									<option th:each="tranche : ${T(ci.mfpma.dq.entites.TrancheAge).values()}"
+										th:value="${tranche}" th:text="${tranche.getTranche()}">
+									</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label for="profession" class="form-label">Profession</label>
+								<select class="form-select uppercase" id="profession" th:field=*{profession.id}
+									required>
+									<option value=''>Selectionner la profession...</option>
+									<option th:each="profession : ${professions}" th:value="${profession.id}"
+										th:text="${profession.libelleProfession}"></option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label for="employeur" class="form-label">Employeur</label>
+								<input type="text" class="form-control uppercase" id="employeur"
+									th:field="*{employeur}">
+							</div>
+							<div class="col-sm-6">
+								<label for="ville" class="form-label">Ville</label>
+								<select class="form-select uppercase" id="ville" th:field=*{ville.id}>
+									<option value=''>Selectionner la ville...</option>
+									<option th:each="ville : ${villes}" th:value="${ville.id}"
+										th:text="${ville.libelleVille}"></option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+							</div>
+						</div>
+						<hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
+						<div class="row g-2">
+							<div class="col-sm-6">
+								<label for="cni" class="form-label">Numéro téléphone</label>
+								<input type="number" class="form-control" id="cellulaire" th:field="*{telephone}"
+									placeholder="saisir seulement les 10 chiffres" maxlength="10" required>
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label">Email</label>
+								<input type="email" class="form-control" id="email" th:field="*{email}">
+							</div>
+						</div>
+						<hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
+						<div class="form-footer text-end">
+							<input id="btnActiver" type="button" class="btn btn-primary" value="Activer" />
+							<input id="btnModifier" type="submit" class="btn btn-success" value="Modifier" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:inline="javascript">
+		$(document).ready(function () {
+			$("#form1 :input").prop("disabled", true);
+			$("#btnActiver").attr('disabled', false);
+			$("#btnModifier").hide();
+		});
+		$("#btnActiver").click(function () {
+			$("#form1 :input").prop("disabled", false);
+			$("#btnActiver").hide();
+			$("#btnModifier").show();
+		});
+	</script>
 </body>
 
 </html>

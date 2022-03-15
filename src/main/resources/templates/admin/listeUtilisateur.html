@@ -1,81 +1,59 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeUtilisateur','Listes des utilisateurs')}">
 <meta charset="utf-8">
-<body class="antialiased">
-        <div class="page-wrapper">
-        	<div class="container-fluid">
-        	<div class="page-header d-print-none">
-            <div class="row align-items-center">
-              <div class="col">               
-                <h2 class="page-title">
-                  Utilisateurs
-                </h2>
-                 <div class="page-pretitle">
-                  Nombre Utilisateurs
+
+<body>
+    <div class="container-xl d-flex flex-column justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title text-center">LISTE DES UTILISATEURS</div>
                 </div>
-              </div>
-              <!-- Page title actions -->
-              <div class="col-auto ms-auto d-print-none">
-                <div class="btn-list">            
-                  <a th:href="@{/admin/nouvelUtilisateur}" class="btn btn-primary d-none d-sm-inline-block">                  
-                    Nouvel Utilisateur
-                  </a>             
-                </div>
-              </div>
-            </div>
-          </div>       	
-        	</div>       	
-            <div class="page-body">
-                <div class="container-fluid">
-                	<div class="card">           						  
-          				<div class="card-body">
-          					<div class="table-responsive">
-          						<table class="styled-table" id="tableUtilisateur" >
-          							 <thead>
-          							 	<tr>
-          							 		<td width="10%">Matricule</td>
-          							 		<td width="20%">Nom</td>
-          							 		<td width="30%">Prénom</td>
-          							 		<td width="10%">Genre </td>
-          							 		<td width="20%">Direction</td> 
-          							 		<td width="10%"></td>       							 		
-          							 	</tr>
-          							 </thead>
-          							 <tbody>
-										<tr th:each="utilisateur : ${utilisateurs}">
-											<td><span th:text="${utilisateur.matricule}"></span></td>
-											<td><span th:text="${utilisateur.nom}"></span></td>
-											<td><span th:text="${utilisateur.prenom}"></span></td>
-											<td><span th:text="${utilisateur.genre}"></span></td>
-											<td></td>
-											<td>
-												<a class="btn btn-info">Update</a>												
-											</td>
-										</tr>
-									</tbody>
-          						</table>
-          					</div>
-          				</div>
-                	</div>
+                <div class="card-body table-responsive">
+                    <a th:href="@{/admin/nouvelUtilisateur}" class="btn btn-sm btn-outline-primary mb-2"><i
+                            class="fa fa-plus"></i>Utilisateur</a>
+                    <table id="tableUtilisateur" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-resizable="true">
+                        <thead>
+                            <tr>
+                                <th width="20%">Matricule</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Genre</th>
+                                <th>Direction</th>
+                                <th>Profil</th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="uppercase">
+                            <tr th:each="utilisateur : ${utilisateurs}">
+                                <td><span th:text="${utilisateur.matricule}"></span></td>
+                                <td><span th:text="${utilisateur.nom}"></span></td>
+                                <td><span th:text="${utilisateur.prenom}"></span></td>
+                                <td><span th:text="${utilisateur.genre}"></span></td>
+                                <td></td>
+                                <td><span th:text="${utilisateur.roles}"></span></td>
+                                <td>
+                                    <button data-toggle="tooltip" title="Modifier" class="pd-setting-mod float-end"><i
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button data-toggle="tooltip" title="Supprimer" class="pd-setting-sup float-end"><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-  	<script>
-	  	$(document).ready(function() {
-	  	    $('#tableUtilisateur').DataTable( {
-	  	        "language": {
-	  	            "lengthMenu": "Affichage _MENU_ utilisateurs",
-	  	            "zeroRecords": "Aucun enregistrement",
-	  	            "info": "page _PAGE_ / _PAGES_",
-	  	            "infoEmpty": "Aucun enregistrement",
-	  	            "infoFiltered": "(tri de _MAX_ total)",
-	  	            "sSearch": "Recherche :",
-	  	            "oPaginate" :{
-	  	            	"sPrevious": "Précedent",
-	  	            	"sNext": "Suivant"
-	  	            } 
-	  	        }
-	  	    } );
-	  	} );
-	</script>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#tableUtilisateur').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                },
+                "lengthChange": false
+            });
+        });
+    </script>
 </body>
+
 </html>

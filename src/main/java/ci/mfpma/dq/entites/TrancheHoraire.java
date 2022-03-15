@@ -26,11 +26,10 @@ public class TrancheHoraire implements Serializable{
 	private Long id;
 	
 	@Column(name = "tranche_horaire_heure_debut")
-	private String libelleHeureDebutTrancheHoraire;
+	private String libelleHeureDebut;
 	
 	@Column(name = "tranche_horaire_heure_fin")
-	private String libelleHeureFinTrancheHoraire;
-	
+	private String libelleHeureFin;
 	
 	@OneToMany(mappedBy = "trancheHoraire", fetch = FetchType.LAZY)
 	private List<Demande> demande;
@@ -39,9 +38,9 @@ public class TrancheHoraire implements Serializable{
 	}
 	
 	
-	public TrancheHoraire(String libelleHeureDebutTrancheHoraire, String libelleHeureFinTrancheHoraire) {
-		this.libelleHeureDebutTrancheHoraire = libelleHeureDebutTrancheHoraire;
-		this.libelleHeureFinTrancheHoraire = libelleHeureFinTrancheHoraire;
+	public TrancheHoraire(String libelleHeureDebut, String libelleHeureFin) {
+		this.libelleHeureDebut = libelleHeureDebut;
+		this.libelleHeureFin = libelleHeureFin;
 	}
 
 	public Long getId() {
@@ -61,23 +60,23 @@ public class TrancheHoraire implements Serializable{
 	}
 
 
-	public String getLibelleHeureDebutTrancheHoraire() {
-		return libelleHeureDebutTrancheHoraire;
+	public String getLibelleHeureDebut() {
+		return libelleHeureDebut;
 	}
 
 
-	public void setLibelleHeureDebutTrancheHoraire(String libelleHeureDebutTrancheHoraire) {
-		this.libelleHeureDebutTrancheHoraire = libelleHeureDebutTrancheHoraire;
+	public void setLibelleHeureDebut(String libelleHeureDebut) {
+		this.libelleHeureDebut = libelleHeureDebut;
 	}
 
 
-	public String getLibelleHeureFinTrancheHoraire() {
-		return libelleHeureFinTrancheHoraire;
+	public String getLibelleHeureFin() {
+		return libelleHeureFin;
 	}
 
 
-	public void setLibelleHeureFinTrancheHoraire(String libelleHeureFinTrancheHoraire) {
-		this.libelleHeureFinTrancheHoraire = libelleHeureFinTrancheHoraire;
+	public void setLibelleHeureFinTrancheHoraire(String libelleHeureFin) {
+		this.libelleHeureFin = libelleHeureFin;
 	}
 	
 	

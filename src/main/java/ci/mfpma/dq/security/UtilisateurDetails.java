@@ -67,6 +67,10 @@ private static final long serialVersionUID = 1L;
 		return utilisateur.getId();
 	}
 	
+	public String getEmail() {
+		return utilisateur.getEmail();
+	}
+	
 	public Direction getDirection() {
 		return utilisateur.getDirection();
 	}

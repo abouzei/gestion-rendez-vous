@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import ci.mfpma.dq.entites.Utilisateur;
 
 @Component
-public class SendEmailLoginPasse {
+public class SendEmailUtil {
 	
 	@Autowired
 	JavaMailSender emailSender;
@@ -27,13 +27,13 @@ public class SendEmailLoginPasse {
 	     
 	    String subject = "LOGIN ET MOT DE PASSE";
 	     
-	    String content = "<p>Bonjour ,</p>"
-	            + "<p>Vous avez été enregistré dans notre base de données après avoir soumis une demande.</p>"
-	            + "<p>de rendez-vous. Les identifiants vous permettant de suivre votre demande sont les suivants : </p>"
-	            + "<p>Login : <b>" + utilisateur.getEmail() + "</b></p>"
-	    	    + "<p>Mot de passe : <b>" + utilisateur.getTelephone() + "</b></p>"
-	            + "<br>"
-	            + "<p>Merci,";
+	    String content =  "<p>Bonjour ,</p>"
+        + "<p>Vous avez été enregistré en tant que utilisateur  la plateforme de gestion des rendez-vous.</p>"
+        + "<p>Les identifiants vous permettant de vous connecter : </p>"
+        + "<p>Identifiant : <b>" + utilisateur.getEmail() + "</b></p>"
+	    + "<p>Mot de passe : <b>" + utilisateur.getTelephone() + "</b></p>"
+        + "<br>"
+        + "<p>Merci,";
 	     
 	    helper.setSubject(subject);
 		     

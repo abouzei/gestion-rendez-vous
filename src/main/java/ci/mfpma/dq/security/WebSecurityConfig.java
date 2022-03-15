@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			"/accueil",
 			"/contact",
 			"/utilisateur/passeOublier",
-			"/utilisateur/changerPasse",
+			"/utilisateur/modifier",
 			"/demande/nouvelleDemande",
 			"/demande/nouvelleDemandeFonctionnaire",
 			

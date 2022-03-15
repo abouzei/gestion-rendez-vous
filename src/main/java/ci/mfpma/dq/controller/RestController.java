@@ -35,7 +35,7 @@ public class RestController {
 	}
 	
 	
-	@GetMapping("usc/nouvelleDemande/listeTranche")
+	@GetMapping("usc/listeTranche")
 	public @ResponseBody String getTrancheUsc(@RequestParam Long directionId, String date)
 	{
 		System.out.println("vu Tranche");

@@ -26,8 +26,8 @@ public class TrancheHoraireServiceImpl implements TrancheHoraireService{
 	}
 
 	@Override
-	public TrancheHoraire getById(Long TrancheHoraireId) {
-		return trancheHoraireRepository.getById(TrancheHoraireId);
+	public TrancheHoraire getById(Long Id) {
+		return trancheHoraireRepository.getById(Id);
 	}
 
 	@Override

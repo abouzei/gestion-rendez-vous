@@ -6,47 +6,36 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title th:text="${titre}"></title>
-		<!-- CCSS APPLICATION -->
-		<link rel="stylesheet" th:href="@{/css/all-style.css}">
-		<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}">
-		<link rel="stylesheet" th:href="@{/css/fullcalendar.css}">
-		<link rel="stylesheet" th:href="@{/css/style.css}">
-		<link rel="stylesheet" th:href="@{/css/style-dp.css}">
-		<link rel="stylesheet" th:href="@{/css/style-table.css}">
-		<link rel="stylesheet" th:href="@{/css/datatable.css}">
-		<link rel="stylesheet" th:href="@{/css/datatb.css}" />
 		
-		 	<!--JS APPLICATION-->
-	   	<script th:src="@{/js/jquery.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/all-script.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/fr.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/fullcalendar.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/script.js}"></script>
-	   	<script type="text/javascript" th:src="@{/js/datatb.js}"></script>
-</head>
+		<link rel="stylesheet" th:href="@{/font-awesome/css/font-awesome.css}"/>
+		<link rel="stylesheet" th:href="@{/css/style.css}"/>
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+		<script th:src="@{/js/jquery.js}"></script>
+		<script th:src="@{/js/script.js}"></script>
+		<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+		<script th:src="@{/js/bootstrap-datepicker.fr.min.js}"></script>
+		<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+		<script th:src="@{/js/jquery.blockUI.js}"></script>
 	</head>
-	<body class="antialiased">
-   		 <div class="wrapper">		 	
-   		   	<div sec:authorize="isAuthenticated()"> 
-   		   		<th:block>
-	   		 		<header th:replace="fragments/menu-utilisateur :: topmenu"></header>	
-	   		 	</th:block>		   	
-	   		 	<th:block sec:authorize="hasAuthority('USAGER-CLIENT')">
-	   		 		<header th:replace="fragments/menu-usc :: menu(${actif})"></header>
-	   		 	</th:block>
-	   		 	<th:block sec:authorize="hasAuthority('ADMIN')">
-	   		 		<header th:replace="fragments/menu-admin :: menu(${actif})"></header>
-	   		 	</th:block>
-   		   	</div>
-   		   	<div sec:authorize="isAnonymous()">
-   		   		<header th:replace="fragments/menu :: menu(${actif})"></header>
-   		   	</div>
-   		 	<div class="page-wrapper">
-               <th:block th:include="${contenu}"></th:block> 		 	
-   		 	</div> 		 	 		 	
-         	<footer th:replace="fragments/footer :: footer">
-   			</footer>
-   		 </div>
-	</body>
+	<body>	 	
+  		 <div sec:authorize="isAuthenticated()"> 	   	
+   		 	<th:block sec:authorize="hasAuthority('USAGER-CLIENT')">
+   		 		<header th:replace="fragments/menu-usc :: menu(${actif})"></header>
+   		 	</th:block>
+   		 	<th:block sec:authorize="hasAuthority('ADMIN')">
+   		 		<header th:replace="fragments/menu-admin :: menu(${actif})"></header>
+   		 	</th:block>
+  		 </div>
+	   	<div sec:authorize="isAnonymous()">
+	   		<header th:replace="fragments/menu :: menu(${actif})"></header>
+	   	</div>
+	 	<div class="page-wrapper">
+	          <th:block th:include="${contenu}"></th:block> 		 	
+	 	</div> 		 	 		 	
+      	<footer th:replace="fragments/footer :: footer">
+		</footer>
+</body>
 </html>

@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-th:replace="~{fragments/layout :: layout (~{::body},'succesDemande','Demande soumise avec succès')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'succesDemande','Demande soumise avec succès')}">
 <meta charset="utf-8">
+
+
 <body>
-    <div class="container-xl">
-    </div>
-    <div class="page-body">
-        <div class="container-xl d-flex flex-column justify-content-center">
-            <div class="empty border rounded-2 border-success">
-                <p class="empty-title">Votre demande a été soumise avec succès</p>
-                <p class="empty-subtitle text-muted">
-                    Vos identifiants de connexions vous ont été transmis par <b>SMS</b>  et par <b>Email</b>.
-                </p>
-                <div class="empty-action">
-                    <a th:href="@{/login}" class="btn btn-primary">
-                         Connectez-vous
-                    </a>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-sm-center h-100">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                    <div class="card shadow-vert">
+                        <div class="card-body p-5 text-center">
+                            <h3>Votre demande de rendez-vous a été soumise avec succès</h3>
+                            <div class="text-center">
+                                <em class="text-center"><i class="fa fa-check fa-5x"></i></em>
+                                <h3>Les informations de votre demande vous on été transmise par email et par SMS.</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer py-3 border-0 text-center">
+                            <a th:href="@{/login}" class="btn btn-primary ms-auto">Connectez-vous</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-   </div>
+    </section>
 </body>
 
 </html>
