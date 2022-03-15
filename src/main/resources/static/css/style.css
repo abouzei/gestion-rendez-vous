@@ -57,23 +57,12 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 /* Bootstrap buttons */
-.ajouter a {
-	float: right;
-	position: absolute;
-	top: 20px;
-	right: 35px;
-	background: #006DF0;
-	padding: 6px 20px;
-	color: #fff;
-	border-radius: 4px;
-}
 
 button.pd-setting-mod {
 	padding: 5px 10px;
 	font-size: 14px;
 	border-radius: 3px;
 	border: 1px solid rgba(0, 0, 0, .12);
-	background: rgb(0, 255, 255);
 }
 
 button.pd-setting-mod {
@@ -86,7 +75,6 @@ button.pd-setting-sup {
 	font-size: 14px;
 	border-radius: 3px;
 	border: 1px solid rgba(0, 0, 0, .12);
-	background: rgb(248, 136, 116);
 }
 
 button.pd-setting-sup {

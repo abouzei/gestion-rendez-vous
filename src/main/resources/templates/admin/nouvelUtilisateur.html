@@ -16,19 +16,23 @@
                             </div>
                             <form method="post" th:action="@{/admin/creerUtilisateur}" th:object="${utilisateur}">
                                 <div class='mb-3'>
-                                    <label class="form-label required" for="name">Nom</label>
+                                    <label class="form-label required" for="nom">Nom</label>
                                     <input type="text" class="form-control" th:field="*{nom}" required minlength="2" id="nom">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label required" for="name">Prénom</label>
+                                    <label class="form-label required" for="prenom">Prénom</label>
                                     <input type="text" class="form-control" th:field="*{prenom}" required id="prenom">
                                 </div>
+                                 <div class="mb-3">
+                                    <label class="form-label" for="matricule">Matricule</label>
+                                    <input type="text" class="form-control" th:field="*{matricule}" id="matricule">
+                                </div>
                                 <div class="mb-3">
-                                    <label class="form-label required" for="password">Adresse email</label>
+                                    <label class="form-label required" for="email">Adresse email</label>
                                     <input type="email" class="form-control" th:field="*{email}" required id="email">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label required" for="password">Numéro de téléphone</label>
+                                    <label class="form-label required" for="telephone">Numéro de téléphone</label>
                                     <input type="number" class="form-control" th:field="*{telephone}" placeholder="saisir seulement les 10 chiffres" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" id="telephone">
                                 </div>
                                 <div class="mb-3">
@@ -36,8 +40,7 @@
                                     <select id="directions" class="form-control" th:field="*{direction.id}" required>
 										<option value="">Selectionner la direction ...</option>
 										<option th:each="direction :${directions}" th:value="${direction.id}"
-											th:text="${direction.libelleDirection}" />
-										</option>
+											th:text="${direction.libelleDirection}" ></option>
 									</select>
                                 </div>
                                 <div class="mb-3">
@@ -45,8 +48,7 @@
                                     <select class="form-control" required name="roles" id="profil">
 										<option value="">Selectionner le profil...</option>
 										<option th:each="role :${roles}" th:value="${role.id}"
-											th:text="${role.nomRole}" />
-										</option>
+											th:text="${role.nomRole}"></option>
 									</select>
                                 </div>
                                 <div class='align-items-center d-flex'>

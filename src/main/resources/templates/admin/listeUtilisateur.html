@@ -8,9 +8,7 @@
                 <div class="card-header">
                     <div class="card-title text-center">LISTE DES UTILISATEURS</div>
                 </div>
-                <div class="card-body table-responsive">
-                    <a th:href="@{/admin/nouvelUtilisateur}" class="btn btn-sm btn-outline-primary mb-2"><i
-                            class="fa fa-plus"></i>Utilisateur</a>
+                <div class="card-body table-responsive">                
                     <table id="tableUtilisateur" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-resizable="true">
                         <thead>
                             <tr>
@@ -31,11 +29,9 @@
                                 <td><span th:text="${utilisateur.genre}"></span></td>
                                 <td></td>
                                 <td><span th:text="${utilisateur.roles}"></span></td>
-                                <td>
-                                    <button data-toggle="tooltip" title="Modifier" class="pd-setting-mod float-end"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                    <button data-toggle="tooltip" title="Supprimer" class="pd-setting-sup float-end"><i
-                                            class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <td class="g-1">
+                                	<button data-toggle="tooltip" title="Modifier" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button data-toggle="tooltip" title="Supprimer" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>                           
                                 </td>
                             </tr>
                         </tbody>
@@ -46,11 +42,20 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#tableUtilisateur').DataTable({
+            $('#tableUtilisateur').DataTable({              
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
                 },
-                "lengthChange": false
+                "lengthChange": false,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: 'Utilisateur',
+                        action: function ( e, dt, node, config ) {
+                        	location.href = "/admin/nouvelUtilisateur";
+                        }
+                    }
+                ]
             });
         });
     </script>
