@@ -18,6 +18,7 @@ import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
 import ci.mfpma.dq.utilitaires.SendEmailNouvelleDemande;
+import ci.mfpma.dq.utilitaires.SendSMS;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
 
@@ -42,6 +43,9 @@ public class DemandeController {
 	
 	@Autowired
 	SendEmailNouvelleDemande sendEmail;
+	
+	@Autowired
+	SendSMS sendSms;
 	
 	@GetMapping("/nouvelleDemande") 
 	public String getNouvelleDemande(Model model) {
@@ -88,6 +92,7 @@ public class DemandeController {
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			e.printStackTrace();
 		}
+		//sendSms.sendSMSNotification(demandeCree);
 		return "demande/succesDemande";
 	}
 	
@@ -103,6 +108,7 @@ public class DemandeController {
 		Demande demandeCree = demandeService.save(demande);
 		demandeCree.setReference(Utilitaires.referenceDemande(demandeCree.getId()));
 		demandeService.save(demandeCree);
+		//sendSms.sendSMSNotification(demandeCree);
 		return "demande/succesDemande";
 	}
 }
