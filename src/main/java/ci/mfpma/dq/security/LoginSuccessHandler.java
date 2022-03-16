@@ -26,13 +26,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		 */
 		String redirectUrl = request.getContextPath();
 		
-		if(utilisateurDetails.hasRole("ROLE_USAGER-CLIENT")) {
+		if(utilisateurDetails.hasRole("USAGER-CLIENT")) {
 			redirectUrl = "/usc/monEspace";
-		}else if(utilisateurDetails.hasRole("ROLE_ADMIN")) {
+		}else if(utilisateurDetails.hasRole("ADMIN")) {
 			redirectUrl = "/admin/accueilAdmin";
-		}else if(utilisateurDetails.hasRole("ROLE_CRUC")) {
+		}else if(utilisateurDetails.hasRole("CRUC")) {
 			redirectUrl = "/cruc/accueil";
-		}else if(utilisateurDetails.hasRole("ROLE_DIRECTION")) {
+		}else if(utilisateurDetails.hasRole("DIRECTION")) {
 			redirectUrl = "/direction/accueil";
 		}
 		response.sendRedirect(redirectUrl);
