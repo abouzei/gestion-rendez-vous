@@ -18,7 +18,7 @@ h5 , h6 {
 	color: #6c757d !important;
 }
 
-div, input, select, textarea, span, img, table, label, td, th, p, a,
+div, input, select, textarea, span, img, label, p, a,
 	button, ul, code, pre, li {
 	-webkit-border-radius: 0 !important;
 	-moz-border-radius: 0 !important;
