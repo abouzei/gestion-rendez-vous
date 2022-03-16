@@ -14,6 +14,10 @@ html {
 	color: #6c757d !important;
 }
 
+h5 , h6 {
+	color: #6c757d !important;
+}
+
 div, input, select, textarea, span, img, table, label, td, th, p, a,
 	button, ul, code, pre, li {
 	-webkit-border-radius: 0 !important;
@@ -471,4 +475,27 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 input[type=number] {
 	-moz-appearance: textfield;
 	/* Firefox */
+}
+
+.conteneur {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #F8F9FA;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2px;
+}
+
+.conteneur-util {
+    padding: 20px;
+    background: #fff;
+}
+
+.titre-photo {
+    font-size: 16px;
+    margin-top: 10px;
+    text-transform: uppercase;
+	color: green;
+	font-style: italic;
+	font-weight: bold;
 }

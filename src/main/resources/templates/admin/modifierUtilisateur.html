@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{fragments/layout :: layout (~{::body},'monCompte','Informations personnelles')}">
+	th:replace="~{fragments/layout :: layout (~{::body},'modifierUtilisateur','Modifier un utilisateur')}">
 <meta charset="utf-8">
 
 <body>
@@ -9,23 +9,39 @@
 				<li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
 			</ul>
 		</div>
-		<h5 class="pb-2 border-bottom mb-2">Informations personnelles</h5>
+		<h5 class="pb-2 border-bottom mb-2">Modifier un utilisateur</h5>
 		<div class="container">
 			<div class="row g-5">
 				<div class="col-md-12 col-lg-12">
-					<form id="form1" th:action="@{/utilisateur/modifierMonCompte}" method="post"
-						th:object="${utilisateur}">
+					<form id="form1" th:action="@{/utilisateur/modifierUtilisateur}" method="post"	th:object="${utilisateur}">
 						<input type="hidden" th:field="*{id}">
-						<div class="row g-2">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="conteneur-util mg-t-30">
+									<div class="titre-photo">
+                               		<a href="#"><img src="" alt=""></a>
+                                	<span th:text="${utilisateur.nom}+' '+${utilisateur.prenom}"></span>                              	
+                            	</div>
+                            	
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div class="row g-2">
+							<div class="col-sm-6">
+								<label for="id" class="form-label">Identifiant</label>
+								<input type="text" class="form-control uppercase" id="id" th:field="*{id}" required>
+							</div>
+							<div class="col-sm-6">
+								<label for="matricule" class="form-label">Matricule</label>
+								<input type="text" class="form-control uppercase" id="matricule" th:field="*{matricule}">
+							</div>
 							<div class="col-sm-6">
 								<label for="cni" class="form-label">Numéro CNI</label>
-								<input type="text" class="form-control uppercase" id="numcni"
-									th:field="*{numPieceIdentite}" required>
+								<input type="text" class="form-control uppercase" id="numcni" th:field="*{numPieceIdentite}" required>
 							</div>
 							<div class="col-sm-6">
 								<label for="dateCni" class="form-label">Date validité CNI</label>
-								<input type="text" placeholder="Choisir une date" class="form-control" id="dateCni"
-									th:field="*{dateEtablissemenPieceIdentite}" autocomplete="off" required>
+								<input type="text" placeholder="Choisir une date" class="form-control" id="dateCni" th:field="*{dateEtablissemenPieceIdentite}" autocomplete="off" required>
 							</div>
 							<div class="col-sm-6">
 								<label for="firstName" class="form-label">Nom</label>
@@ -47,31 +63,25 @@
 								<label for="firstName" class="form-label">Tranche d'âge</label>
 								<select class="form-select uppercase" id="tranche" th:field="*{trancheAge}">
 									<option value="">Selectionner la tranche d'age...</option>
-									<option th:each="tranche : ${T(ci.mfpma.dq.entites.TrancheAge).values()}"
-										th:value="${tranche}" th:text="${tranche.getTranche()}">
-									</option>
+									<option th:each="tranche : ${T(ci.mfpma.dq.entites.TrancheAge).values()}" th:value="${tranche}" th:text="${tranche.getTranche()}"></option>
 								</select>
 							</div>
 							<div class="col-sm-6">
 								<label for="profession" class="form-label">Profession</label>
-								<select class="form-select uppercase" id="profession" th:field=*{profession.id}
-									required>
+								<select class="form-select uppercase" id="profession" th:field=*{profession.id}	required>
 									<option value=''>Selectionner la profession...</option>
-									<option th:each="profession : ${professions}" th:value="${profession.id}"
-										th:text="${profession.libelleProfession}"></option>
+									<option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.libelleProfession}"></option>
 								</select>
 							</div>
 							<div class="col-sm-6">
 								<label for="employeur" class="form-label">Employeur</label>
-								<input type="text" class="form-control uppercase" id="employeur"
-									th:field="*{employeur}">
+								<input type="text" class="form-control uppercase" id="employeur" th:field="*{employeur}">
 							</div>
 							<div class="col-sm-6">
 								<label for="ville" class="form-label">Ville</label>
 								<select class="form-select uppercase" id="ville" th:field=*{ville.id}>
 									<option value=''>Selectionner la ville...</option>
-									<option th:each="ville : ${villes}" th:value="${ville.id}"
-										th:text="${ville.libelleVille}"></option>
+									<option th:each="ville : ${villes}" th:value="${ville.id}" th:text="${ville.libelleVille}"></option>
 								</select>
 							</div>
 							<div class="col-sm-6">
@@ -81,12 +91,13 @@
 						<div class="row g-2">
 							<div class="col-sm-6">
 								<label for="cni" class="form-label">Numéro téléphone</label>
-								<input type="number" class="form-control" id="cellulaire" th:field="*{telephone}"
-									placeholder="saisir seulement les 10 chiffres" maxlength="10" required>
+								<input type="number" class="form-control" id="cellulaire" th:field="*{telephone}" placeholder="saisir seulement les 10 chiffres" maxlength="10" required>
 							</div>
 							<div class="col-sm-6">
 								<label for="email" class="form-label">Email</label>
 								<input type="email" class="form-control" id="email" th:field="*{email}">
+							</div>
+						</div>
 							</div>
 						</div>
 						<hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">

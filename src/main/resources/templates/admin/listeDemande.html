@@ -1,22 +1,22 @@
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeUtilisateur','Listes des utilisateurs')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeDemande','Listes des des demandes')}">
 <meta charset="utf-8">
 
 <body>
 	<div class="container shadow-lg p-3 mb-5 bg-white rounded">	
-		<h5 class="pb-2 border-bottom mb-3">Liste des utilisateurs</h5>
+		<h5 class="pb-2 border-bottom mb-2">Informations personnelles</h5>
 		<div class="container">
 			<div class="row g-5">
  				<div class="col-md-12 col-lg-12">              
                     <table id="table" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-resizable="true">
                         <thead>
                             <tr>
-                                <th width="20%">Matricule</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Genre</th>
+                                <th>Réference</th>
+                                <th>Usager-client</th>
+                                <th>Date</th>
+                                <th>Tranche</th>
                                 <th>Direction</th>
-                                <th>Profil</th>
-                                <th width="10%"></th>
+                                <th>Statut</th>
+                                <th ></th>
                             </tr>
                         </thead>
                         <tbody class="uppercase">
@@ -28,8 +28,8 @@
                                 <td></td>
                                 <td><span th:text="${utilisateur.roles}"></span></td>
                                 <td class="g-1">
-                                	<a data-toggle="tooltip" title="Modifier" class="btn btn-primary" th:href="@{'/admin/modifierUtilisateur/'+${utilisateur.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a data-toggle="tooltip" title="Supprimer" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>                           
+                                	<button data-toggle="tooltip" title="Modifier" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button data-toggle="tooltip" title="Supprimer" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>                           
                                 </td>
                             </tr>
                         </tbody>
@@ -43,17 +43,7 @@
             $('#table').DataTable({              
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
-                },
-                "lengthChange": false,
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: 'Utilisateur',
-                        action: function ( e, dt, node, config ) {
-                        	location.href = "/admin/nouvelUtilisateur";
-                        }
-                    }
-                ]
+                },             
             });
         });
     </script>
