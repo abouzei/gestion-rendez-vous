@@ -4,7 +4,7 @@
 
 <body>
     <div class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px;">
-        <h5 class="pb-2 border-bottom mb-2">Demande n°</h5>
+        <h5 class="pb-2 border-bottom mb-2">Vos demandes de rendez-vous</h5>
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
@@ -22,7 +22,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="demande : ${demandes}">
-                                <td><span th:text="${demande.reference}"></span></td>
+                                <td style="font-weight: bold; color:#c24210"><span th:text="${demande.reference}"></span></td>
                                 <td><span th:text="${demande.dateCreation}"></span></td>
                                 <td><span th:text="${demande.direction.libelleDirection}"></span></td>
                                 <td><span th:text="${demande.dateRendezVous}"></span></td>
@@ -40,5 +40,4 @@
         </div>
     </div>
 </body>
-
 </html>

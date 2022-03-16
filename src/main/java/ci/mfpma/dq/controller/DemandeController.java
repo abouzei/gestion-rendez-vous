@@ -43,6 +43,12 @@ public class DemandeController {
 	@Autowired
 	SendEmailNouvelleDemande sendEmail;
 	
+	@GetMapping("/test") 
+	public String getTest() {
+		
+		return "demande/succesDemande"; 
+	}
+	
 	@GetMapping("/nouvelleDemande") 
 	public String getNouvelleDemande(Model model) {
 		model.addAttribute("demande", new Demande());

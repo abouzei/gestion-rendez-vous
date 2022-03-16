@@ -26,16 +26,16 @@ public class SendEmailNouvelleDemande {
 	    helper.setFrom("zeibadjo@gmail.com", "WebMaster");
 	    helper.setTo(demande.getUtilisateur().getEmail());
 	     
-	    String subject = "DEMANDE DE RENDEZ-VOUS MFPMA";
+	    String subject = "DEMANDE DE RENDEZ-VOUS MFPMA N° "+demande.getReference().toUpperCase();
 	     
-	    String content =  "<p>Bonjour ,</p>"
+	    String content =  "<p>Bonjour ,"+demande.getUtilisateur().getNom().toUpperCase()+"</p>"
         + "<p>Vous avez été enregistré dans notre base de données après avoir soumis une demande de rendez-vous.</p>"
-        +"<p>Numéro de la demande : <b>" + demande.getReference() + "</b> du : "+ demande.getDateCreation() +"</p>"
+        +"<p>Numéro de la demande : <b>" + demande.getReference() + "</b> du "+ demande.getDateCreation() +"</p>"
         + "<p>Les identifiants vous permettant de suivre votre demande sont les suivants : </p>"
         + "<p>Identifiant : <b>" + demande.getUtilisateur().getEmail() + "</b></p>"
 	    + "<p>Mot de passe : <b>" + demande.getUtilisateur().getTelephone() + "</b></p>"
         + "<br>"
-        + "<p>Merci,";
+        + "<p>Merci.";
 	     
 	    helper.setSubject(subject);
 		     

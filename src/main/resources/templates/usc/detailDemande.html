@@ -3,7 +3,7 @@
 
 <body>
      <div class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px;">
-        <h5 class="pb-2 border-bottom mb-2">Demande n°</h5>
+        <h5 class="pb-2 border-bottom mb-4 ">Demande n° : <span th:text="${demande.reference}"></span></h5>
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
@@ -16,6 +16,12 @@
                     			<td style="width: 30%; color:#c24210;" th:classappend="${demande.statut}"><span th:text="${demande.statut}"></span></td>
                     		</tr>
                     		<tr>                    			
+                    			<td>Date rendez-vous</td>
+                    			<td style="color:#c24210"><span th:text="${demande.dateRendezVous}"></span></td>
+                    			<td>Tranche horaire</td>
+                    			<td style="color:#c24210"><span th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></span></td>
+                    		</tr>
+                    		<tr>                    			
                     			<td>Direction</td>
                     			<td style="color:#c24210"><span th:text="${demande.direction.libelleDirection}"></span></td>
                     			<td>Tranche horaire</td>
@@ -23,7 +29,6 @@
                     		</tr>
                     	</tbody>
                     </table>
-                    <hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
                 </div>
             </div>
         </div>

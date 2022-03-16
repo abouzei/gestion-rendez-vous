@@ -460,7 +460,7 @@ td.CONFIRMER {
 *  Page Validation Ombre
 */
 .shadow-vert {
-	box-shadow: 0 1rem 1rem rgb(80, 240, 120) !important
+	box-shadow: 0 0.25rem 0.25rem rgb(80, 240, 120) !important
 }
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
