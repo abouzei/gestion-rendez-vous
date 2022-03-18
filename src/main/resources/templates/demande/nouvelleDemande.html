@@ -9,7 +9,7 @@
                 <li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
             </ul>
         </div>
-        <h5 class="pb-2 border-bottom mb-3">Soumettre un demande de rendez-vous</h5>
+        <h5 class="pb-2 border-bottom mb-3">Soumettre une demande de rendez-vous</h5>
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
@@ -74,7 +74,7 @@
                         <hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
                         <div class="row g-2">
                             <div class="col-sm-6">
-                                <label for="cni" class="form-label required">Numéro téléphone</label>
+                                <label for="cni" class="form-label required">Téléphone</label>
                                 <input type="number" class="form-control" id="telephone" th:field="*{utilisateur.telephone}" placeholder="saisir seulement les 10 chiffres" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                     maxlength="10">
                             </div>
@@ -104,7 +104,7 @@
 								</select>
                             </div>
                             <div class="col-sm-12">
-                                <label for="dateCni" class="form-label">motif</label>
+                                <label for="dateCni" class="form-label">Motif</label>
                                 <textarea class="form-control" data-bs-toggle="autosize" id="motif" th:field="*{motif}"></textarea>
                             </div>
                         </div>

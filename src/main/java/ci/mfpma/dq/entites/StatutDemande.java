@@ -7,5 +7,5 @@ public enum StatutDemande {
 	    ANNULER,
 	    REFUSER,
 	    REJETER,
-	    TERMINER
+	    TERMINER  
 }

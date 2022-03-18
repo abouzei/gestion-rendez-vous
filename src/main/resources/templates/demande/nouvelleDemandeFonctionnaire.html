@@ -9,21 +9,21 @@
                 <li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
             </ul>
         </div>
-        <h5 class="pb-2 border-bottom mb-2">Soumettre un demande de rendez-vous</h5>
+        <h5 class="pb-2 border-bottom mb-2">Soumettre une demande de rendez-vous</h5>
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
                     <form th:action="@{/demande/soumettreDemande}" method="post" th:object="${demande}">
                         <div class="row g-2">
                             <div class="col-sm-6">
-                                <label for="cni" class="form-label required">Maticule</label>
+                                <label for="cni" class="form-label required">Matricule</label>
                                 <input type="text" class="form-control uppercase" id="matricule" th:field="*{utilisateur.numPieceIdentite}" required>
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
                         <div class="row g-2">
                             <div class="col-sm-6">
-                                <label for="cni" class="form-label required">Numéro téléphone</label>
+                                <label for="cni" class="form-label required">Téléphone</label>
                                 <input type="number" class="form-control" id="telephone" th:field="*{utilisateur.telephone}" placeholder="saisir seulement les 10 chiffres" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                     maxlength="10">
                             </div>
@@ -38,8 +38,7 @@
                                 <label for="cni" class="form-label required">Direction</label>
                                 <select id="directions" class="form-control" th:field="*{direction.id}" required>
 									<option value=''>Selectionner la direction ...</option>
-									<option th:each="ob:${directions}" th:value="${ob[0]}" th:text="${ob[1]}" />
-									</option>
+									<option th:each="ob:${directions}" th:value="${ob[0]}" th:text="${ob[1]}"></option>
 								</select>
                             </div>
                             <div class="col-sm-3">

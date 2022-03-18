@@ -62,6 +62,11 @@ public class UtilisateurController {
 		return "utilisateur/modifierPasse"; 		
 	}
 	
+	@GetMapping("/succesPasse") 
+	public String getSuccesPasse() { 
+		return "utilisateur/succesPasse"; 		
+	}
+	
 	@GetMapping("/monCompte") 
 	public String getMonCompte(Model model,@AuthenticationPrincipal UtilisateurDetails util) {
 		model.addAttribute("professions", professionService.findAllByOrderByLibelleProfessionAsc());
@@ -97,8 +102,10 @@ public class UtilisateurController {
 		String passe = request.getParameter("password");
 		Utilisateur utilisateur = utilisateurService.getById(util.getId());
 		utilisateurService.updatePassword(utilisateur, passe);
-		return "redirect:/utilisateur/monEspace";
+		return "redirect:/utilisateur/succesPasse";
 	}
+	
+	
 	
 	@PostMapping("/passeOublier") 
 	public String passeOublierProcess(HttpServletRequest request, Model model) { 
