@@ -13,8 +13,7 @@
 		<div class="container">
 			<div class="row g-5">
 				<div class="col-md-12 col-lg-12">
-					<form id="form1" th:action="@{/utilisateur/modifierUtilisateur}" method="post"	th:object="${utilisateur}">
-						<input type="hidden" th:field="*{id}">
+					<form id="form1" th:action="@{/admin/modifierUtilisateur}" method="post" th:object="${utilisateur}">
 						<div class="row">
 							<div class="col-md-3">
 								<div class="conteneur-util mg-t-30">
@@ -26,11 +25,11 @@
 								</div>
 							</div>
 							<div class="col-md-9">
-								<div class="row g-2">
+								<div class="row g-2">	
 							<div class="col-sm-6">
-								<label for="id" class="form-label">Identifiant</label>
-								<input type="text" class="form-control uppercase" id="id" th:field="*{id}" required>
-							</div>
+								<label for="identifiant" class="form-label">Identifiant</label>
+								<input type="text" class="form-control uppercase" id="identifiant" th:field="*{id}">
+							</div>					
 							<div class="col-sm-6">
 								<label for="matricule" class="form-label">Matricule</label>
 								<input type="text" class="form-control uppercase" id="matricule" th:field="*{matricule}">
@@ -85,6 +84,11 @@
 								</select>
 							</div>
 							<div class="col-sm-6">
+								<label for="direction" class="form-label">Direction</label>
+								<select class="form-select uppercase" id="direction" th:field=*{direction.id}	required>
+									<option value=''>Selectionner la direction...</option>
+									<option th:each="direction : ${directions}" th:value="${direction.id}" th:text="${direction.libelleDirection}"></option>
+								</select>
 							</div>
 						</div>
 						<hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
@@ -118,6 +122,7 @@
 		});
 		$("#btnActiver").click(function () {
 			$("#form1 :input").prop("disabled", false);
+			$("#id").attr('disabled', true);
 			$("#btnActiver").hide();
 			$("#btnModifier").show();
 		});

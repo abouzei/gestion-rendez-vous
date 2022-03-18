@@ -126,4 +126,25 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	public List<Utilisateur> findListUserByRole(Long role) {
 		return utilisateurRepository.findListUserByRole(role);
 	}
+
+	@Override
+	public Utilisateur findByNumCni(String numCni) {
+		
+		return utilisateurRepository.findByNumPieceIdentite(numCni);
+	}
+
+	@Override
+	public Utilisateur findByEmail(String email) {
+		return utilisateurRepository.findByEmail(email);
+	}
+
+	@Override
+	public Utilisateur findByTelephone(String telephone) {
+		return utilisateurRepository.findBytelephone(telephone);
+	}
+
+	@Override
+	public List<Utilisateur> findListUserNotUsc() {
+		return utilisateurRepository.findListUserNotUsc();
+	}
 }

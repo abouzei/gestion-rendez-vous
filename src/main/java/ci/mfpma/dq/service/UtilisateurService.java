@@ -18,6 +18,12 @@ public interface UtilisateurService {
 	public void deleteById(Utilisateur utilisateur);
 	
 	public Utilisateur findByMatricule(String matricule);
+	
+	public Utilisateur findByNumCni(String numCni);
+
+	public Utilisateur findByEmail(String email);
+	
+	public Utilisateur findByTelephone(String telephone);
 	 
 	public boolean isNumPieceExist(String numPiece);
 	 
@@ -34,4 +40,6 @@ public interface UtilisateurService {
 	public void updatePassword(Utilisateur utilisateur, String nouveauPasse);
 	
 	public List<Utilisateur> findListUserByRole(Long role);
+	
+	public List<Utilisateur> findListUserNotUsc();
 }

@@ -25,6 +25,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 	
 	@Query("SELECT u FROM Utilisateur u LEFT JOIN u.roles r WHERE r.id = ?1")
 	public List<Utilisateur> findListUserByRole(Long role);
+	
+	@Query("SELECT u FROM Utilisateur u WHERE u.id NOT IN (SELECT u.id FROM Utilisateur u LEFT JOIN u.roles r WHERE r.id = 1)")
+	public List<Utilisateur> findListUserNotUsc();
 	 
 	public Utilisateur findByResetPasswordToken(String resetPasswordToken);
 	

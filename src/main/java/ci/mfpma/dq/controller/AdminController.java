@@ -7,6 +7,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ci.mfpma.dq.entites.Utilisateur;
+import ci.mfpma.dq.security.UtilisateurDetails;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.RoleService;
@@ -51,7 +53,7 @@ public class AdminController {
 	
 	@GetMapping("/listeUtilisateur")
 	public String getListeUtilisateur(Model model) {
-		model.addAttribute("utilisateurs", utilisateurService.getAll());
+		model.addAttribute("utilisateurs", utilisateurService.findListUserNotUsc());
 		return "admin/listeUtilisateur";
 	}
 	
@@ -67,10 +69,37 @@ public class AdminController {
 	@GetMapping("/modifierUtilisateur/{id}") 
 	public String getModifierUtilisateur(Model model, @PathVariable(name = "id") Long id) {
 		model.addAttribute("professions", professionService.findAllByOrderByLibelleProfessionAsc());
-		model.addAttribute("directions", directionService.getAllDirections());
+		model.addAttribute("directions", directionService.getAllDirectionsAsc());
 		model.addAttribute("villes", villeService.getAllVilles());
 		model.addAttribute("utilisateur", utilisateurService.getById(id));
 		return "admin/modifierUtilisateur"; 
+	}
+	
+	@PostMapping("/modifierUtilisateur")
+	public String modifierMonCompteProcess(Utilisateur utilisateur, Model model) {
+		List<String> erreurs = new ArrayList<>();
+		Utilisateur util = utilisateurService.getById(utilisateur.getId());
+		if(utilisateurService.isEmailExist(utilisateur.getEmail()) && utilisateur.getId() != util.getId()) {
+			erreurs.add("Cette adresse email existe déjà");
+		}		
+		if(utilisateurService.isNumPieceExist(utilisateur.getNumPieceIdentite()) && utilisateur.getId() != util.getId()) {
+			erreurs.add("Ce numéro de pièce existe déjà");
+		}
+		if(utilisateurService.isTelelphoneExist(utilisateur.getTelephone()) && utilisateur.getId() != util.getId()) {
+			erreurs.add("Ce numéro de téléphone existe déjà");
+		}
+		if(utilisateurService.isTelelphoneExist(utilisateur.getMatricule()) && utilisateur.getId() != util.getId()) {
+			erreurs.add("Ce matricule existe déjà");
+		}
+		if(!erreurs.isEmpty()){
+			model.addAttribute("erreurs", erreurs);
+			model.addAttribute("professions", professionService.findAllByOrderByLibelleProfessionAsc());
+			model.addAttribute("villes", villeService.getAllVilles());
+			model.addAttribute("directions", directionService.getAllDirectionsAsc());
+			return "admin/modifierUtilisateur";
+		}
+		utilisateurService.save(utilisateur);
+		return "redirect:/admin/modifierUtilisateur/"+utilisateur.getId();
 	}
 	
 	
