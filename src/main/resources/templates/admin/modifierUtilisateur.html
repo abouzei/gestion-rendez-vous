@@ -67,7 +67,7 @@
 							</div>
 							<div class="col-sm-6">
 								<label for="profession" class="form-label">Profession</label>
-								<select class="form-select uppercase" id="profession" th:field=*{profession.id}	required>
+								<select class="form-select uppercase" id="profession" th:field="*{profession.id}"	required>
 									<option value=''>Selectionner la profession...</option>
 									<option th:each="profession : ${professions}" th:value="${profession.id}" th:text="${profession.libelleProfession}"></option>
 								</select>
@@ -78,14 +78,14 @@
 							</div>
 							<div class="col-sm-6">
 								<label for="ville" class="form-label">Ville</label>
-								<select class="form-select uppercase" id="ville" th:field=*{ville.id}>
+								<select class="form-select uppercase" id="ville" th:field="*{ville.id}">
 									<option value=''>Selectionner la ville...</option>
 									<option th:each="ville : ${villes}" th:value="${ville.id}" th:text="${ville.libelleVille}"></option>
 								</select>
 							</div>
 							<div class="col-sm-6">
 								<label for="direction" class="form-label">Direction</label>
-								<select class="form-select uppercase" id="direction" th:field=*{direction.id}	required>
+								<select class="form-select uppercase" id="direction" th:field="*{direction.id}"	required>
 									<option value=''>Selectionner la direction...</option>
 									<option th:each="direction : ${directions}" th:value="${direction.id}" th:text="${direction.libelleDirection}"></option>
 								</select>

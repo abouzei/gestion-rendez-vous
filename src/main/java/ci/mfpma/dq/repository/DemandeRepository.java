@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ci.mfpma.dq.entites.Demande;
+import ci.mfpma.dq.entites.Utilisateur;
 
 public interface DemandeRepository extends JpaRepository<Demande, Long> {
 	

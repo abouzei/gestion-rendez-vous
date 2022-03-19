@@ -13,7 +13,7 @@ import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
 
 @Component
-public class SendEmailUtilExist {
+public class SendEmailUtilExistModif {
 	
 	@Autowired
 	JavaMailSender emailSender;
@@ -24,13 +24,12 @@ public class SendEmailUtilExist {
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
 	     
 	    helper.setFrom("zeibadjo@gmail.com", "WebMaster");
-	    helper.setTo(email);
-	     
+	    helper.setTo(email);	    
 	    
-	    String subject = "DEMANDE DE RENDEZ-VOUS N° :"+demande.getReference();
+	    String subject = "MODIFICATION DE LA DEMANDE DE RENDEZ-VOUS N° :"+demande.getReference();
 	     
 	    String content =  "<p>Bonjour ,<b>"+ demande.getUtilisateur().getNom()+"</b></p>"
-        + "<p>vous avez soumis une demande de rendez-vous.</p>"
+        + "<p>vous avez modifier votre demande de rendez-vous.</p>"
         +"<p>Numéro de la demande : <b>" + demande.getReference() + "</b> du : "+ demande.getDateCreation() +"</p>"
         + "<p>Connectez vous avec vos identifiants identiques </p>"
         + "<br>"

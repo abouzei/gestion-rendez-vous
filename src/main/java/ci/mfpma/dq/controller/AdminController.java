@@ -7,7 +7,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
-import ci.mfpma.dq.security.UtilisateurDetails;
+import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.RoleService;
@@ -29,10 +29,10 @@ import ci.mfpma.dq.utilitaires.SendEmailUtil;
 public class AdminController {
 	
 	@Autowired
-	UtilisateurService utilisateurService;
+	private UtilisateurService utilisateurService;
 	
 	@Autowired
-	DirectionService directionService;
+	private DirectionService directionService;
 	
 	@Autowired
 	private ProfessionService professionService;
@@ -41,10 +41,13 @@ public class AdminController {
 	private VilleService villeService;
 	
 	@Autowired
-	RoleService roleService;
+	private DemandeService demandeService;
 	
 	@Autowired
-	SendEmailUtil sendEmailUtil;
+	private RoleService roleService;
+	
+	@Autowired
+	private SendEmailUtil sendEmailUtil;
 	
 	@GetMapping("/accueilAdmin")
 	public String getAccueilAdmin() {
@@ -55,6 +58,21 @@ public class AdminController {
 	public String getListeUtilisateur(Model model) {
 		model.addAttribute("utilisateurs", utilisateurService.findListUserNotUsc());
 		return "admin/listeUtilisateur";
+	}
+	
+	
+	@GetMapping("/listeDemande")
+	public String getListeDemande(Model model) {
+		model.addAttribute("demandes", demandeService.getAll());
+		return "admin/listeDemande";
+	}
+	
+	@GetMapping("/infosDemande/{demandeId}")
+	public String getDetailsDemandeUsagerClient(@PathVariable("demandeId") Long demandeId, Model model) {
+		model.addAttribute("directions", directionService.getAllDirections());
+		Demande demande = demandeService.getById(demandeId);
+		model.addAttribute("demande", demande);
+		return"admin/infosDemande";
 	}
 	
 	@GetMapping("/nouvelUtilisateur")

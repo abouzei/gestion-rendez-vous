@@ -29,7 +29,7 @@ public class DemandeServiceImpl implements DemandeService{
 	
 	
 	@Override
-	@PreAuthorize("hasAutho('ADMIN') or hasAuthority('CRUC')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CRUC')")
 	public List<Demande> getAll() {
 		return demandeRepository.findAll();
 	}
@@ -53,8 +53,10 @@ public class DemandeServiceImpl implements DemandeService{
 
 	@Override
 	public Demande save(Demande demande) {
-		demande.setDateCreation(Utilitaires.getCurrentDateString());
-		demande.setStatut(StatutDemande.SOUMIS);
+		if(demande.getId() == null) {
+			demande.setDateCreation(Utilitaires.getCurrentDateString());
+			demande.setStatut(StatutDemande.SOUMIS);
+		}
 		demande.setDirection(directionService.getById(demande.getDirection().getId()));
 		demande.setTrancheHoraire(trancheHoraireService.getById(demande.getTrancheHoraire().getId()));
 		return demandeRepository.save(demande);

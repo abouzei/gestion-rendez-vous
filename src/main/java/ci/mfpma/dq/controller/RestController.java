@@ -50,6 +50,24 @@ public class RestController {
 		}
 		return json;
 	}
+	
+	
+	
+	@GetMapping("/usc/detailDemande/listeTranche")
+	public @ResponseBody String getTrancheDetails(@RequestParam Long directionId, String date)
+	{
+		System.out.println("vu Tranche");
+		String json = null; 
+		System.out.println(directionId+" "+date);		
+		List<Object[]> list = trancheHoraireService.getAllFreeTranches(directionId,date); 
+		try {
+			json = new ObjectMapper().writeValueAsString(list); 
+		}
+		catch  (JsonProcessingException e) { 
+			e.printStackTrace();
+		}
+		return json;
+	}
 
 
 }

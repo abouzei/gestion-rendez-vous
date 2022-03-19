@@ -3,33 +3,32 @@
 
 <body>
 	<div class="container shadow-lg p-3 mb-5 bg-white rounded">	
-		<h5 class="pb-2 border-bottom mb-2">Informations personnelles</h5>
+		<h5 class="pb-2 border-bottom mb-2">Demandes</h5>
 		<div class="container">
 			<div class="row g-5">
  				<div class="col-md-12 col-lg-12">              
-                    <table id="table" data-toggle="table" data-toolbar="#toolbar" data-search="true" data-resizable="true">
-                        <thead>
+                    <table id="table" class="table row-border">
+                        <thead class="bg-light">
                             <tr>
-                                <th>Réference</th>
+                                <th>Identifiant</th>
                                 <th>Usager-client</th>
                                 <th>Date</th>
                                 <th>Tranche</th>
                                 <th>Direction</th>
                                 <th>Statut</th>
-                                <th ></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="uppercase">
-                            <tr th:each="utilisateur : ${utilisateurs}">
-                                <td><span th:text="${utilisateur.matricule}"></span></td>
-                                <td><span th:text="${utilisateur.nom}"></span></td>
-                                <td><span th:text="${utilisateur.prenom}"></span></td>
-                                <td><span th:text="${utilisateur.genre}"></span></td>
-                                <td></td>
-                                <td><span th:text="${utilisateur.roles}"></span></td>
+                            <tr th:each="demande : ${demandes}">
+                                <td><span th:text="${demande.reference}"></span></td>
+                                <td><span th:text="${demande.utilisateur.nom}+' '+ ${demande.utilisateur.prenom}"></span></td>
+                                <td><span th:text="${demande.dateRendezVous}"></span></td>
+                                <td><span th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></span></td>
+                                <td><span th:text="${demande.direction.libelleCourtDirection}"></span></td>
+                                <td th:classappend="${demande.statut}"><span th:text="${demande.statut}"></span></td>
                                 <td class="g-1">
-                                	<button data-toggle="tooltip" title="Modifier" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                    <button data-toggle="tooltip" title="Supprimer" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>                           
+                                	<a data-toggle="tooltip" title="Modifier" class="btn btn-primary" th:href="@{'/admin/infosDemande/'+${demande.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>                                                             
                                 </td>
                             </tr>
                         </tbody>

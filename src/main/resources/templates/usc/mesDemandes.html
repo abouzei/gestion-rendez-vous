@@ -29,8 +29,7 @@
                                 <td><span th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></span></td>
                                 <td th:classappend="${demande.statut}"><span th:text="${demande.statut}"></span>
                                 </td>
-                                <td><a class="btn btn-warning"
-                                        th:href="@{'/usc/detailDemande/'+${demande.id}}">Details</a>
+                                <td><a class="btn btn-warning" th:href="@{'/usc/detailDemande/'+${demande.id}}">Details</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -39,5 +38,10 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+	    $(document).ready(function() {
+		    
+	    });
+    </script>
 </body>
 </html>

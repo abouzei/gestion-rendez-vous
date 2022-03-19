@@ -3,32 +3,56 @@
 
 <body>
      <div class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px;">
-        <h5 class="pb-2 border-bottom mb-4 ">Demande n° : <span style="font-weight: bold; color:#c24210" th:text="${demande.reference}"></span></h5>
+        <h5 class="pb-2 border-bottom mb-4">Demande n° : <span style="font-weight: bold; color:#c24210" th:text="${demande.reference}"></span></h5>
+        <h6 th:text="${message}"></h6>
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
-                <form th:action="@{/usc/modifierDemande}" method="post" th:object="${demande}">
+                <form id="form1" th:action="@{/usc/modifierDemande}" method="post" th:object="${demande}">
+                   <input type="hidden" th:field="*{id}">
+                   <input type="hidden" th:field="*{reference}">
 	               <div class="table-responsive">
-	                   <table id="user" class="table table-sm">
+	                   <table class="table table-sm">
 	                   	<tbody style="font-weight: bold">
 	                   		<tr>                    			
-	                   			<td style="width: 10%">Date de sousmission</td>
-	                   			<td style="width: 30%; color:#c24210;"><input class="form-control uppercase" th:value="${demande.dateCreation}"></input></td>
-	                   			<td style="width: 10%">Statut</td>
-	                   			<td style="width: 30%; color:#c24210;" th:classappend="${demande.statut}"><input class="form-control uppercase" th:value="${demande.statut}"></input></td>
+	                   			<td>Date de sousmission</td>
+	                   			<td><input type="text" id="dateCre" class="form-control" th:field="*{dateCreation}" readonly="readonly"></input></td>	             
 	                   		</tr>
-	                   		<tr>                    			
-	                   			<td>Date rendez-vous</td>
-	                   			<td style="color:#c24210"><input class="form-control uppercase" th:value="${demande.dateRendezVous}"></input></td>
-	                   			<td>Tranche horaire</td>
-	                   			<td style="color:#c24210"><input class="form-control uppercase" th:value="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></input></td>
+	                   		<tr>
+	                   			<td >Statut</td>
+	                   			<td><select class="form-select" id="genre" th:field="*{statut}" required>
+									<option th:value="${demande.statut}" th:text="${demande.statut}"></option>
+									<option th:value="ANNULER">ANNULER</option>
+								</select>
+								</td>
 	                   		</tr>
 	                   		<tr>                    			
 	                   			<td>Direction</td>
-	                   			<td style="color:#c24210"><input class="form-control uppercase" th:value="${demande.direction.libelleDirection}"></input></td>                   			
+	                   			<td style="color:#c24210" class="col-6">
+	                   			<select id="directions" class="form-control" th:field="*{direction.id}" required>
+									<option value=''>Selectionner la direction ...</option>
+									<option th:each="ob:${directions}" th:value="${ob[0]}" th:text="${ob[1]}" />
+								</select>
+	                   			</td>                   			
 	                   		</tr>
+	                   		<tr>                    			
+	                   			<td>Date rendez-vous</td>
+	                   			<td><input type="text" placeholder="Choisir une date" class="form-control" id="dateRdv" th:field="*{dateRendezVous}" autocomplete="off" required></td>
+	                   			<td>Tranche horaire</td>
+	                   			<td>
+									<select id="tranches" class="form-control" th:field="*{trancheHoraire.id}" >
+										<option th:value="${demande.trancheHoraire.id}" th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></option>
+									</select>
+	                   			</td>
+	                   		</tr> 	                   		               			                   		
 	                   	</tbody>
-	                   </table>
+	                  </table>                  
+	                  </div>
+	                  <div class="row mb-3">	                  		
+	                  	<div class="col-md-12">
+	                  		<label for="motif" class="form-label"><b>Motif</b></label>
+	                  		<textarea class="form-control" data-bs-toggle="autosize" id="motif" th:field="*{motif}"></textarea>
+	                  	</div>
 	                  </div>
 	                  <div class="form-footer">
 							<input id="btnActiver" type="button" class="btn btn-primary" value="Activer" />
@@ -39,6 +63,39 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $("#dateRdv").on("change", function() {
+        var date = $(this).val();
+        var directionId = $("#directions").val();
+        var s = '<option value="${demande.trancheHoraire.id}" th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}">Selectionner la tranche ...</option>';
+        if (directionId > 0) {
+            $.ajax({
+                url: 'listeTranche',
+                data: {
+                    "directionId": directionId,
+                    "date": date
+                },
+                success: function(result) {
+                    var result = JSON.parse(result);
+                    for (var i = 0; i < result.length; i++) {
+                        s += '<option value="' + result[i][0] + '">' + result[i][1] + '  -  ' + result[i][2] + '</option>';
+                    }
+                    $('#tranches').html(s);
+                }
+            });
+        }
+    });
+    $(document).ready(function () {
+		$("#form1 :input").prop("disabled", true);
+		$("#btnActiver").attr('disabled', false);
+		$("#btnModifier").hide();
+	});
+	$("#btnActiver").click(function () {
+		$("#form1 :input").prop("disabled", false);
+		$("#btnActiver").hide();
+		$("#btnModifier").show();
+	});
+    </script>
 </body>
 
 </html>
