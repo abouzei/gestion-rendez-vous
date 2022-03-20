@@ -1,5 +1,7 @@
 package ci.mfpma.dq.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +68,32 @@ public class DemandeServiceImpl implements DemandeService{
 	@PreAuthorize("#Id == principal.id")
 	public List<Demande> listeDemandeByUtilisateurId(Long Id) {
 		return demandeRepository.listeDemandeByUtilisateurId(Id);
+	}
+	
+	@Override
+	public List<StatutDemande> statutUsc() {
+		List<StatutDemande>  statutCRUC = new ArrayList <>();
+		statutCRUC.add(StatutDemande.SOUMIS);
+		statutCRUC.add(StatutDemande.ANNULER);
+		return statutCRUC;
+	}
+
+	@Override
+	public List<StatutDemande> statutCRUC() {
+		List<StatutDemande>  statutCRUC = new ArrayList <>();
+		statutCRUC.add(StatutDemande.SOUMIS);
+		statutCRUC.add(StatutDemande.PROGRAMMER);
+		statutCRUC.add(StatutDemande.REJETER);
+		statutCRUC.add(StatutDemande.REFUSER);
+		return statutCRUC;
+	}
+
+	@Override
+	public List<StatutDemande> statutDirection() {
+		List<StatutDemande>  statutCRUC = new ArrayList <>();
+		statutCRUC.add(StatutDemande.PROGRAMMER);
+		statutCRUC.add(StatutDemande.REJETER);
+		statutCRUC.add(StatutDemande.REFUSER);
+		return statutCRUC;
 	}
 }

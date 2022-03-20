@@ -135,6 +135,7 @@ public class Demande implements Serializable{
 		return statut;
 	}
 
+
 	public void setStatut(StatutDemande statut) {
 		this.statut = statut;
 	}

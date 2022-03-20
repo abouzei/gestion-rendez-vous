@@ -1,4 +1,4 @@
-package ci.mfpma.dq.utilitaires;
+package ci.mfpma.dq.mail;
 
 import java.io.UnsupportedEncodingException;
 

@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ci.mfpma.dq.entites.Demande;
+import ci.mfpma.dq.mail.SendEmailNouvelleDemande;
 import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailNouvelleDemande;
+
 import ci.mfpma.dq.utilitaires.SendSMS;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 

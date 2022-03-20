@@ -11,13 +11,13 @@
                         <a class="nav-link" th:href="@{/admin/accueilAdmin}" th:classappend="${actif} == 'accueil' ? 'active':''">
                             Accueil
                         </a>
-                    </li>
+                    </li>                 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                             Demandes
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="./widgets.html">Calendrier</a>
+                            <a class="dropdown-item" th:classappend="${actif} == 'calendrierDemande' ? 'active':''" th:href="@{/admin/calendrierDemande}">Calendriers</a>
                             <a class="dropdown-item" th:classappend="${actif} == 'listeDemande' ? 'active':''" th:href="@{/admin/listeDemande}">Listes</a>
                         </div>
                     </li>
@@ -26,7 +26,7 @@
                             Usager-Client
                         </a>
                     </li>
-                    <li class="nav-item" th:classappend="${actif} == 'direction' ? 'active':''">
+                    <li class="nav-item" th:classappend="${actif} == 'direction' ? 'active':''" sec:authorize="hasAnyAuthority('ADMIN','CRUC')">
                         <a class="nav-link" href="#navbar-extra" role="button" aria-expanded="false">
                             Directions
                         </a>
@@ -58,7 +58,7 @@
                             <a class="dropdown-item" href="./widgets.html">Rapports</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
                         <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                             Paramètres
                         </a>

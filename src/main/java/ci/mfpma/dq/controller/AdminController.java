@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
+import ci.mfpma.dq.mail.SendEmailModifDemande;
+import ci.mfpma.dq.mail.SendEmailUtil;
 import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.RoleService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,6 +50,9 @@ public class AdminController {
 	@Autowired
 	private SendEmailUtil sendEmailUtil;
 	
+	@Autowired
+	private SendEmailModifDemande sendEmailModifDemande;
+	
 	@GetMapping("/accueilAdmin")
 	public String getAccueilAdmin() {
 		return "admin/accueil";
@@ -67,13 +71,20 @@ public class AdminController {
 		return "admin/listeDemande";
 	}
 	
+	@GetMapping("/calendrierDemande")
+	public String getDemandeCalendrier(Model model) {
+		return "admin/calendrierDemande";
+	}
+	
 	@GetMapping("/infosDemande/{demandeId}")
 	public String getDetailsDemandeUsagerClient(@PathVariable("demandeId") Long demandeId, Model model) {
 		model.addAttribute("directions", directionService.getAllDirections());
+		model.addAttribute("statuts", demandeService.statutCRUC());
 		Demande demande = demandeService.getById(demandeId);
 		model.addAttribute("demande", demande);
 		return"admin/infosDemande";
 	}
+	
 	
 	@GetMapping("/nouvelUtilisateur")
 	public String getNouvelUtilisateur(Model model) {
@@ -143,6 +154,19 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return "redirect:/admin/listeUtilisateur";
+	}
+	
+	
+	@PostMapping("/modifierDemande")
+	public String modifierDemandeProcess(Demande demande) {
+		demande.setUtilisateur(utilisateurService.getById(demande.getUtilisateur().getId()));
+		demandeService.save(demande);
+		try {
+			sendEmailModifDemande.sendMessage(demande);
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/infosDemande/"+demande.getId();
 	}
 
 }

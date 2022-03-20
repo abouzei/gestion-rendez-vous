@@ -9,10 +9,10 @@
 				<li th:each="erreur :${erreurs}" th:text="${erreur}"></li>
 			</ul>
 		</div>
-		<h5 class="pb-2 border-bottom mb-2">Modifier un utilisateur</h5>
 		<div class="container">
 			<div class="row g-5">
 				<div class="col-md-12 col-lg-12">
+				<h5 class="pb-2 border-bottom mb-2">Modifier un utilisateur</h5>
 					<form id="form1" th:action="@{/admin/modifierUtilisateur}" method="post" th:object="${utilisateur}">
 						<div class="row">
 							<div class="col-md-3">
@@ -107,6 +107,7 @@
 						<hr style="height:2px; width:100%; border-width:0; color:red; background-color:red">
 						<div class="form-footer">
 							<input id="btnActiver" type="button" class="btn btn-primary" value="Activer" />
+							<input id="btnReset" type="reset" class="btn btn-danger" value="Annuler" />
 							<input id="btnModifier" type="submit" class="btn btn-success" value="Modifier" />
 						</div>
 					</form>
@@ -119,12 +120,14 @@
 			$("#form1 :input").prop("disabled", true);
 			$("#btnActiver").attr('disabled', false);
 			$("#btnModifier").hide();
+			$("#btnReset").hide();
 		});
 		$("#btnActiver").click(function () {
 			$("#form1 :input").prop("disabled", false);
 			$("#id").attr('disabled', true);
 			$("#btnActiver").hide();
 			$("#btnModifier").show();
+			$("#btnReset").show();
 		});
 	</script>
 </body>

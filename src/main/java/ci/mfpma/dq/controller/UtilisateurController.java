@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
 import ci.mfpma.dq.exception.UtilisateurNotFoundException;
+import ci.mfpma.dq.mail.SendEmailResetPassword;
 import ci.mfpma.dq.security.UtilisateurDetails;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.RoleService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailResetPassword;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
 @Controller

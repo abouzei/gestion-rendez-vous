@@ -1,4 +1,4 @@
-package ci.mfpma.dq.utilitaires;
+package ci.mfpma.dq.mail;
 
 import java.io.UnsupportedEncodingException;
 
@@ -9,30 +9,29 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
 
 @Component
-public class SendEmailUtilExist {
+public class SendEmailUtil {
 	
 	@Autowired
 	JavaMailSender emailSender;
 	
-	public void sendMessage (Demande demande, String email) throws MessagingException, UnsupportedEncodingException {
+	public void sendMessage (Utilisateur utilisateur) throws MessagingException, UnsupportedEncodingException {
 
 	    MimeMessage message = emailSender.createMimeMessage();              
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
 	     
 	    helper.setFrom("zeibadjo@gmail.com", "WebMaster");
-	    helper.setTo(email);
+	    helper.setTo(utilisateur.getEmail());
 	     
-	    
-	    String subject = "DEMANDE DE RENDEZ-VOUS N° :"+demande.getReference();
+	    String subject = "LOGIN ET MOT DE PASSE";
 	     
-	    String content =  "<p>Bonjour ,<b>"+ demande.getUtilisateur().getNom()+"</b></p>"
-        + "<p>vous avez soumis une demande de rendez-vous.</p>"
-        +"<p>Numéro de la demande : <b>" + demande.getReference() + "</b> du : "+ demande.getDateCreation() +"</p>"
-        + "<p>Connectez vous avec vos identifiants identiques </p>"
+	    String content =  "<p>Bonjour ,</p>"
+        + "<p>Vous avez été enregistré en tant que utilisateur  la plateforme de gestion des rendez-vous.</p>"
+        + "<p>Les identifiants vous permettant de vous connecter : </p>"
+        + "<p>Identifiant : <b>" + utilisateur.getEmail() + "</b></p>"
+	    + "<p>Mot de passe : <b>" + utilisateur.getTelephone() + "</b></p>"
         + "<br>"
         + "<p>Merci,";
 	     

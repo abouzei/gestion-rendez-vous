@@ -22,14 +22,14 @@ import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.StatutDemande;
 import ci.mfpma.dq.entites.Utilisateur;
 import ci.mfpma.dq.mail.MessageEmail;
+import ci.mfpma.dq.mail.SendEmailUtilExist;
+import ci.mfpma.dq.mail.SendEmailUtilExistModif;
 import ci.mfpma.dq.security.UtilisateurDetails;
 import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
 import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendEmailUtilExist;
-import ci.mfpma.dq.utilitaires.SendEmailUtilExistModif;
 import ci.mfpma.dq.utilitaires.SendSMS;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
@@ -80,6 +80,7 @@ public class CompteController {
 	public String getDetailsDemandeUsagerClient(@PathVariable("demandeId") Long demandeId, Model model) {
 		model.addAttribute("directions", directionService.getAllDirections());
 		Demande demande = demandeService.getById(demandeId);
+		model.addAttribute("statuts", demandeService.statutUsc());
 		model.addAttribute("demande", demande);
 		return"usc/detailDemande";
 	}

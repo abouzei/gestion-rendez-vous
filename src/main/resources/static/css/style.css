@@ -167,6 +167,10 @@ td.CONFIRMER {
 	box-shadow: 0 0.25rem 0.25rem rgb(80, 240, 120) !important
 }
 
+/*
+*  SUPPRILER ICONE INPUT NUMBER
+*/ 
+
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
@@ -176,6 +180,8 @@ input[type=number] {
 	-moz-appearance: textfield;
 	/* Firefox */
 }
+
+
 
 .conteneur {
     padding-top: 10px;
@@ -200,10 +206,18 @@ input[type=number] {
 	font-weight: bold;
 }
 
+.style-detail{
+	font-weight: bold; 
+	color:#c24210;
+}
+
+/*
+*   AFFICHAGE TABLE
+*/
 
 
 .table {
-	border-spacing: 0 15px;
+	border-spacing: 5px 15px;
 	border-collapse: separate;
 }
 .table thead tr th,

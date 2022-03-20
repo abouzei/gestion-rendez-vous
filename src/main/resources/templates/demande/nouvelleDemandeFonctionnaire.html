@@ -36,7 +36,7 @@
                         <div class="row g-2">
                             <div class="col-sm-6">
                                 <label for="cni" class="form-label required">Direction</label>
-                                <select id="directions" class="form-control" th:field="*{direction.id}" required>
+                                <select id="directions" class="form-select" th:field="*{direction.id}" required>
 									<option value=''>Selectionner la direction ...</option>
 									<option th:each="ob:${directions}" th:value="${ob[0]}" th:text="${ob[1]}"></option>
 								</select>
