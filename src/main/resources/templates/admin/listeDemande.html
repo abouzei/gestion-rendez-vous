@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeDemande','Listes des des demandes')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeDemande','Listes des demandes')}">
 <meta charset="utf-8">
 
 <body>
@@ -14,7 +14,7 @@
                                 <th>Usager-client</th>
                                 <th>Date</th>
                                 <th>Tranche</th>
-                                <th>Direction</th>
+                                <th sec:authorize="hasAnyAuthority('ADMIN','CRUC')">Direction</th>
                                 <th>Statut</th>
                                 <th></th>
                             </tr>
@@ -25,7 +25,7 @@
                                 <td><span th:text="${demande.utilisateur.nom}+' '+ ${demande.utilisateur.prenom}"></span></td>
                                 <td><span th:text="${demande.dateRendezVous}"></span></td>
                                 <td><span th:text="${demande.trancheHoraire.libelleHeureDebut}+' - '+${demande.trancheHoraire.libelleHeureFin}"></span></td>
-                                <td><span th:text="${demande.direction.libelleCourtDirection}"></span></td>
+                                <td sec:authorize="hasAnyAuthority('ADMIN','CRUC')"><span th:text="${demande.direction.libelleCourtDirection}"></span></td>
                                 <td th:classappend="${demande.statut}"><span th:text="${demande.statut}"></span></td>
                                 <td class="g-1">
                                 	<a data-toggle="tooltip" title="Modifier" class="btn btn-primary" th:href="@{'/admin/infosDemande/'+${demande.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>                                                             

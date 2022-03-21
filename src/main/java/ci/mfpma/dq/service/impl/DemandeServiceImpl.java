@@ -96,4 +96,9 @@ public class DemandeServiceImpl implements DemandeService{
 		statutCRUC.add(StatutDemande.REFUSER);
 		return statutCRUC;
 	}
+
+	@Override
+	public List<Demande> listeDemandeByDirectionDesc(Long demandeId) {
+		return demandeRepository.listeDemandeByDirectionDesc(demandeId);
+	}
 }

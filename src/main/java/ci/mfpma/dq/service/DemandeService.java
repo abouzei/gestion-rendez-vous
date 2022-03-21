@@ -18,6 +18,8 @@ public interface DemandeService {
 	
 	Long getValDemandeId();
 	
+	List<Demande> listeDemandeByDirectionDesc(Long demandeId);
+	
 	List<Demande> listeDemandeByUtilisateurId(Long utilisateurId);
 	
 	List<StatutDemande> statutUsc();

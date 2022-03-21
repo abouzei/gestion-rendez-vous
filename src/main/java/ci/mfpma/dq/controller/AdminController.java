@@ -7,6 +7,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.Utilisateur;
 import ci.mfpma.dq.mail.SendEmailModifDemande;
 import ci.mfpma.dq.mail.SendEmailUtil;
+import ci.mfpma.dq.security.UtilisateurDetails;
 import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
 import ci.mfpma.dq.service.ProfessionService;
@@ -64,10 +66,20 @@ public class AdminController {
 		return "admin/listeUtilisateur";
 	}
 	
+	@GetMapping("/listeUsagerClient")
+	public String getListeUsc(Model model) {
+		model.addAttribute("utilisateurs", utilisateurService.findListUserByRole(1L));
+		return "admin/listeUsagerClient";
+	}
+	
 	
 	@GetMapping("/listeDemande")
-	public String getListeDemande(Model model) {
-		model.addAttribute("demandes", demandeService.getAll());
+	public String getListeDemande(Model model, @AuthenticationPrincipal UtilisateurDetails util) {
+		if(util.hasRole("ADMIN") || util.hasRole("CRUC")) {
+			model.addAttribute("demandes", demandeService.getAll());
+		}else {
+			model.addAttribute("demandes", demandeService.listeDemandeByDirectionDesc(util.getDirection().getId()));
+		}
 		return "admin/listeDemande";
 	}
 	

@@ -17,4 +17,7 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
 	
     @Query("select d from Demande d where d.utilisateur.id = :id ")
     public List<Demande> listeDemandeByUtilisateurId(@Param("id") Long id);
+    
+    @Query("SELECT d from Demande d WHERE d.direction.id = ?1 ORDER BY d.dateCreation DESC")
+    public List<Demande> listeDemandeByDirectionDesc(Long demandeId);
 }

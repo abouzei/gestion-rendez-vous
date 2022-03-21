@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'listeUsagerClient','Listes des usagers clients')}">
+<meta charset="utf-8">
+
+<body>
+	<div class="container shadow-lg p-3 mb-5 bg-white rounded">	
+		<div class="container">
+			<div class="row g-5">
+ 				<div class="col-md-12 col-lg-12">  
+ 					<h5 class="pb-2 border-bottom mb-3">Usager Client</h5>            
+                    <table id="table" class="table row-border">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Genre</th>
+                                <th>Tranche age</th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="uppercase">
+                            <tr th:each="utilisateur : ${utilisateurs}">
+                                <td><span th:text="${utilisateur.nom}"></span></td>
+                                <td><span th:text="${utilisateur.prenom}"></span></td>
+                                <td><span th:text="${utilisateur.genre}"></span></td>
+                                <td><span th:text="${utilisateur.trancheAge}"></span></td>
+                                <td class="g-1">                    	
+                                    <a data-toggle="tooltip" title="Supprimer" class="btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true"></i></a>                           
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#table').DataTable({
+            	responsive: true,              
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                },
+                "lengthChange": false,                               
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -73,8 +73,11 @@
 								</select>
 							</div>
 							<div class="col-sm-6">
-								<label for="employeur" class="form-label">Employeur</label>
-								<input type="text" class="form-control uppercase" id="employeur" th:field="*{employeur}">
+								<label for="direction" class="form-label">Direction</label>
+								<select class="form-select uppercase" id="direction" th:field="*{direction.id}"	required>
+									<option value=''>Selectionner la direction...</option>
+									<option th:each="direction : ${directions}" th:value="${direction.id}" th:text="${direction.libelleDirection}"></option>
+								</select>
 							</div>
 							<div class="col-sm-6">
 								<label for="ville" class="form-label">Ville</label>

@@ -1,18 +1,12 @@
 package ci.mfpma.dq.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,17 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ci.mfpma.dq.entites.Demande;
 import ci.mfpma.dq.entites.StatutDemande;
-import ci.mfpma.dq.entites.Utilisateur;
-import ci.mfpma.dq.mail.MessageEmail;
 import ci.mfpma.dq.mail.SendEmailUtilExist;
 import ci.mfpma.dq.mail.SendEmailUtilExistModif;
 import ci.mfpma.dq.security.UtilisateurDetails;
 import ci.mfpma.dq.service.DemandeService;
 import ci.mfpma.dq.service.DirectionService;
-import ci.mfpma.dq.service.ProfessionService;
 import ci.mfpma.dq.service.UtilisateurService;
-import ci.mfpma.dq.service.VilleService;
-import ci.mfpma.dq.utilitaires.SendSMS;
 import ci.mfpma.dq.utilitaires.Utilitaires;
 
 @Controller 
